@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Navbar.css"; // Import the CSS file
+import "./Navbar.css";
 
 function Navbar() {
   return (
@@ -16,7 +16,9 @@ function Navbar() {
           <Link to="/create">Create Event</Link>
         </li>
         <li>
-          <Link to="/profile">Profile</Link>
+          <Link to="/profile">
+            <i className="fa-light fa-circle-user"></i> Profile
+          </Link>
         </li>
       </ul>
     </nav>
