@@ -5,9 +5,11 @@
   justify-content: space-between;
   align-items: center;
   background-color: #d4ecff;
-  width: 100%;
   height: 60px;
-  padding: 0 1rem;
+  margin: 0; /* Remove unwanted margins */
+  padding: 1rem;
+  box-sizing: border-box;
+  inline-size: max-content; 
 }
 
 .nav-links {
@@ -21,20 +23,8 @@
 .navbar a {
   color: black;
   text-decoration: none;
+  padding: 0.5rem 1rem; 
+  font-size: 1rem;
 }
 
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    gap: 0;
-    background-color: #d4ecff;
-    width: 100%;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    padding: 1rem 0;
-  }
 
-  .nav-links.open {
-    display: flex;
-  }

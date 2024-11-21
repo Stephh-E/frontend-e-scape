@@ -1,32 +1,47 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 
 function Navbar() {
-  // Define links as an array of objects for scalability and maintainability
-  const navLinks = [
-    { path: "/", label: "Sign In Page" },
-    { path: "/events", label: "New Event Page" },
-    { path: "/create", label: "Create Event Page" },
-    { path: "/myevents", label: "My Events" },
-    { path: "/searchevents", label: "Search Events" },
-    { path: "/calendar", label: "My Calendar" },
-    { path: "/profile", label: <i className="fa-solid fa-circle-user fa-2xl"></i> },
-  ];
+  const [searchInput, setSearchInput] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearchChange = (event) => {
+    setSearchInput(event.target.value);
+  };
+
+  const handleSearchDoubleClick = () => {
+    navigate("/searchevents");
+  };
 
   return (
     <nav className="navbar">
       <div className="logo">
-        {/* Logo with link to home/sign-in */}
-        <Link to="/">EventPlanner</Link>
+        <Link to="/">Sign In Page</Link>
       </div>
       <ul className="nav-links">
-        {/* Map through navLinks to create dynamic links */}
-        {navLinks.map((link, index) => (
-          <li key={index}>
-            <Link to={link.path}>{link.label}</Link>
-          </li>
-        ))}
+        <li>
+          <Link to="/events">New Event Page</Link>
+        </li>
+        <li>
+          <Link to="/create">Create Event Page</Link>
+        </li>
+        <li>
+          {/* Search Bar */}
+          <input
+            type="text"
+            value={searchInput}
+            onChange={handleSearchChange}
+            onDoubleClick={handleSearchDoubleClick}
+            placeholder="Search Events..."
+            className="search-bar"
+          />
+        </li>
+        <li>
+          <Link to="/profile">
+            <i className="fa-solid fa-circle-user fa-2xl"></i> User 1
+          </Link>
+        </li>
       </ul>
     </nav>
   );
