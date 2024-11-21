@@ -10,9 +10,12 @@ function App() {
     <div>
       <Navbar />
       <Routes>
-        <Route path="/" element={<h1>Home Page</h1>} />
-        <Route path="/events" element={<h1>Events Page</h1>} />
+        <Route path="/" element={<h1>Sign in Page</h1>} />
+        <Route path="/events" element={<h1>New Event Page</h1>} />
         <Route path="/create" element={<h1>Create Event Page</h1>} />
+        <Route path="/myevents" element={<h1>My Events</h1>} />
+        <Route path="/searchevents" element={<h1>Search Events</h1>} />
+        <Route path="/calendar" element={<h1>My Calendar</h1>} />
         <Route path="/profile" element={<h1>Profile Page</h1>} />
       </Routes>
     </div>
