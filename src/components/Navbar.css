@@ -1,30 +1,77 @@
 .navbar {
   display: flex;
-  position: absolute;
-  top: 0;
-  justify-content: space-between;
+  justify-content: space-between; 
   align-items: center;
   background-color: #d4ecff;
   height: 60px;
-  margin: 0; /* Remove unwanted margins */
-  padding: 1rem;
-  box-sizing: border-box;
-  inline-size: max-content; 
-}
-
-.nav-links {
-  display: flex;
-  list-style: none;
-  gap: 1rem;
+  width: 100vw;
   margin: 0;
-  padding: 0;
+  padding: 0 1rem; /* Add space on the sides */
+  box-sizing: border-box;
+  position: fixed; /* Keeps navbar at the top */
+  top: 0;
+  left: 0;
 }
 
-.navbar a {
+.left-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Space between hamburger and calendar */
+}
+
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Space between search bar and profile icon */
+}
+
+/* Hamburger Menu */
+.hamburger-menu {
+  cursor: pointer;
+}
+
+.hamburger-menu i,
+.calendar-link i {
   color: black;
-  text-decoration: none;
-  padding: 0.5rem 1rem; 
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
+/* Search Bar */
+.search-bar {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Profile Icon */
+.profile-link i {
+  color: black;
+  font-size: 1.5rem;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  position: absolute;
+  top: 60px; 
+  left: 0;
+  background-color: #d4ecff;
+  list-style: none;
+  padding: 1rem;
+  border-radius: 5px;
+  z-index: 1000;
+}
+
+.dropdown-menu li {
+  padding: 0.5rem 0;
+}
+
+.dropdown-menu a {
+  text-decoration: none;
+  color: black;
+}
+
+.dropdown-menu a:hover {
+  color: #007bff;
+}
 

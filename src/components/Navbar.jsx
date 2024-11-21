@@ -4,6 +4,7 @@ import "./Navbar.css";
 
 function Navbar() {
   const [searchInput, setSearchInput] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleSearchChange = (event) => {
@@ -14,36 +15,54 @@ function Navbar() {
     navigate("/searchevents");
   };
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <nav className="navbar">
-      <div className="logo">
-        <Link to="/">Sign In Page</Link>
-      </div>
-      <ul className="nav-links">
-        <li>
-          <Link to="/events">New Event Page</Link>
-        </li>
-        <li>
-          <Link to="/create">Create Event Page</Link>
-        </li>
-        <li>
-          {/* Search Bar */}
-          <input
-            type="text"
-            value={searchInput}
-            onChange={handleSearchChange}
-            onDoubleClick={handleSearchDoubleClick}
-            placeholder="Search Events..."
-            className="search-bar"
-          />
-        </li>
-        <li>
-          <Link to="/profile">
-            <i className="fa-solid fa-circle-user fa-2xl"></i> User 1
-          </Link>
-        </li>
-      </ul>
-    </nav>
+  {/* Left section: Hamburger menu and calendar */}
+  <div className="left-section">
+    <div className="hamburger-menu" onClick={toggleMenu}>
+      <i className="fa-solid fa-bars fa-1xl"></i>
+    </div>
+
+    <Link to="/calendar" className="calendar-link">
+      <i className="fa-solid fa-calendar-days fa-1xl"></i>
+    </Link>
+  </div>
+
+  {/* Right section: Search bar and profile */}
+  <div className="right-section">
+    <input
+      type="text"
+      value={searchInput}
+      onChange={handleSearchChange}
+      onDoubleClick={handleSearchDoubleClick}
+      placeholder="Search Events..."
+      className="search-bar"
+    />
+    <Link to="/profile" className="profile-link">
+      <i className="fa-solid fa-circle-user fa-1xl"></i>
+    </Link>
+  </div>
+
+  {/* Dropdown Menu (triggered by hamburger) */}
+  {menuOpen && (
+    <ul className="dropdown-menu">
+      <li>
+        <Link to="/create" onClick={() => setMenuOpen(false)}>
+          Create Event
+        </Link>
+      </li>
+      <li>
+        <Link to="/searchevents" onClick={() => setMenuOpen(false)}>
+          Search Events
+        </Link>
+      </li>
+    </ul>
+  )}
+</nav>
   );
 }
 
