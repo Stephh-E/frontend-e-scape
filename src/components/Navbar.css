@@ -6,11 +6,16 @@
   height: 60px;
   width: 100vw;
   margin: 0;
-  padding: 0 1rem; /* Add space on the sides */
+  padding: 0 1rem;
   box-sizing: border-box;
   position: fixed; /* Keeps navbar at the top */
   top: 0;
   left: 0;
+}
+
+/* Add margin or padding for content below */
+main {
+  margin-top: 60px; /* Pushes the content below the navbar */
 }
 
 .left-section {
