@@ -13,9 +13,8 @@
   left: 0;
 }
 
-/* Add margin or padding for content below */
 main {
-  margin-top: 60px; /* Pushes the content below the navbar */
+  margin-top: 70px; /* Pushes the content below the navbar */
 }
 
 .left-section {

@@ -102,11 +102,14 @@
 
 /* Load More Button */
 .load-more {
-  text-align: center;
+  text-align: right;
   margin-top: 30px;
 }
 
 .load-more-button {
+  position:relative;
+  bottom: 200px;    
+  right: 20px;  
   padding: 10px 20px;
   font-size: 18px;
   background-color: #000;
