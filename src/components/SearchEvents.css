@@ -1,7 +1,7 @@
 /* Overall container */
 .search-events-container {
   display: grid;
-  grid-template-columns: 1fr 3fr; /* 1 column for search, 3 columns for grid */
+  grid-template-columns: 1fr 3fr; /* 1 column for search, 3 columns for  Events grid */
   gap: 20px;
   padding: 20px;
 }
@@ -56,7 +56,7 @@
 }
 
 .filter-dropdown {
-  display: none; /* Initially hidden */
+  display: none; 
   position: absolute;
   top: 30px;
   left: 0;
@@ -107,14 +107,13 @@
 }
 
 .load-more-button {
-  position:relative;
-  bottom: 200px;    
+  position:fixed;
+  bottom: 20px;    
   right: 20px;  
   padding: 10px 20px;
   font-size: 18px;
   background-color: #000;
   color: white;
-  border: none;
   border-radius: 5px;
   cursor: pointer;
 }
