@@ -1,101 +1,100 @@
-import React, { useState } from 'react';
-import './CreateEvent.css';
-
+import React, { useState } from "react";
+import "./CreateEvent.css";
 
 const CreateEvent = () => {
-    const [eventDetails, setEventDetails] = useState({
-        title: "",
-        date: "",
-        location: "",
-        description: "",
-      });
-      const [image, setImage] = useState(null);
-      const [rsvpOption, setRsvpOption] = useState("");
-    
-      const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setEventDetails((prevDetails) => ({
-          ...prevDetails,
-          [name]: value,
-        }));
-      };
+  const [eventTitle, setEventTitle] = useState("");
+  const [eventDescription, setEventDescription] = useState("");
+  const [eventWhen, setEventWhen] = useState("");
+  const [eventWhere, setEventWhere] = useState("");
+  const [eventBring, setEventBring] = useState("");
+  const [attendance, setAttendance] = useState("");
 
-return (
-    <div className="search-events-container">
-        <h1> Create New Event </h1>
-
-        <div className="form-group">
-            <label> Event Title</label>
-            <input 
-                type="text"
-                name="title"
-          value={eventDetails.title}
-          onChange={handleInputChange}
-          placeholder="Enter event title"
-        />
-    </div>
-
-    <div className="form-section">
-        <label>Event Date</label>
-        <input
-          type="date"
-          name="date"
-          value={eventDetails.date}
-          onChange={handleInputChange}
-        />
-      </div>
-
-      <div className="form-section">
-        <label>Location</label>
+  return (
+    <div className="create-event-container">
+      <header className="create-event-header">
         <input
           type="text"
-          name="location"
-          value={eventDetails.location}
-          onChange={handleInputChange}
-          placeholder="Enter location"
+          placeholder="Event Title ..."
+          className="event-title-input"
+          value={eventTitle}
+          onChange={(e) => setEventTitle(e.target.value)}
         />
-      </div>
-
-      <div className="form-section">
-        <label>Description</label>
-        <textarea
-          name="description"
-          value={eventDetails.description}
-          onChange={handleInputChange}
-          placeholder="Enter event description"
-        />
-      </div>
-
-      <div className="form-section">
-        <label>RSVP Options</label>
-        <div className="rsvp-options">
-          <button
-            className={rsvpOption === "going" ? "active" : ""}
-            onClick={() => handleRsvpChange("going")}
-          >
-            Going
-          </button>
-          <button
-            className={rsvpOption === "maybe" ? "active" : ""}
-            onClick={() => handleRsvpChange("maybe")}
-          >
-            Maybe
-          </button>
-          <button
-            className={rsvpOption === "cantgo" ? "active" : ""}
-            onClick={() => handleRsvpChange("cantgo")}
-          >
-            Can't Go
-          </button>
+        <button className="theme-button">Change Theme</button>
+      </header>
+      <main className="create-event-main">
+        <div className="left-column">
+          <textarea
+            placeholder="Describe your event here..."
+            className="event-description-input"
+            value={eventDescription}
+            onChange={(e) => setEventDescription(e.target.value)}
+          />
+          <div className="image-upload-placeholder">Add Image Placeholder</div>
         </div>
-      </div>
-
-      <button className="create-event-button">Create Event</button>
+        <div className="right-column">
+          <div className="event-details">
+            <label>WHEN:</label>
+            <input
+              type="text"
+              className="event-detail-input"
+              value={eventWhen}
+              onChange={(e) => setEventWhen(e.target.value)}
+            />
+            <label>WHERE:</label>
+            <input
+              type="text"
+              className="event-detail-input"
+              value={eventWhere}
+              onChange={(e) => setEventWhere(e.target.value)}
+            />
+            <label>BRING:</label>
+            <input
+              type="text"
+              className="event-detail-input"
+              value={eventBring}
+              onChange={(e) => setEventBring(e.target.value)}
+            />
+          </div>
+          <div className="image-upload-placeholder">Add Image Placeholder</div>
+        </div>
+      </main>
+      <footer className="create-event-footer">
+        <div className="attendance-options">
+          <label>
+            <input
+              type="radio"
+              value="attending"
+              checked={attendance === "attending"}
+              onChange={(e) => setAttendance(e.target.value)}
+            />
+            Attending
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="maybe"
+              checked={attendance === "maybe"}
+              onChange={(e) => setAttendance(e.target.value)}
+            />
+            Maybe!
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="cant-go"
+              checked={attendance === "cant-go"}
+              onChange={(e) => setAttendance(e.target.value)}
+            />
+            Can't Go
+          </label>
+        </div>
+        <div className="action-buttons">
+          <button className="save-button">Save</button>
+          <button className="publish-button">Publish</button>
+        </div>
+      </footer>
     </div>
   );
 };
 
 export default CreateEvent;
-
-    
-        
