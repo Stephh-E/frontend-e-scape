@@ -64,12 +64,15 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   background: #fff;
-  z-index: 1;
+  z-index: 10; /* Ensure it appears above other elements */
 }
 
-.filter-icon:hover + .filter-dropdown,
-.filter-dropdown:focus {
-  display: block; /* Show dropdown on hover or focus */
+.filter-icon:hover + .filter-dropdown {
+  display: block; /* Show dropdown on hover */
+}
+
+.filter-dropdown:hover {
+  display: block;
 }
 
 /* Events Grid */

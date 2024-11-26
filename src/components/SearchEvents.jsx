@@ -29,7 +29,7 @@ const SearchEvents = () => {
               placeholder="Search for events..."
             />
             <div className="filter-dropdown-container">
-              <i class="fa-solid fa-sliders fa-xl"></i>
+              <i className="fa-solid fa-sliders fa-xl filter-icon"></i>
               <select
                 className="filter-dropdown"
                 value={filter}
