@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './SearchEvents.css';  
+import "../css/global.css"; 
+import '../css/SearchEvents.css';  
 
 const SearchEvents = () => {
     const [searchQuery, setSearchQuery] = useState('');

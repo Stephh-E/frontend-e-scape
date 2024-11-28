@@ -1,0 +1,23 @@
+/* Specific styles for Create Event Page */
+.create-event-grid {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 20px;
+  padding: 20px;
+}
+
+.grid-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.event-title-input {
+  font-size: 26px;
+  padding: 10px;
+  width: 30%;
+  border: 1px solid var(--text-color);
+  border-radius: 4px;
+}
+
+

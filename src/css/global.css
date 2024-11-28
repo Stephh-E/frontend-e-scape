@@ -1,0 +1,46 @@
+/* Universal Styles */
+
+/* Font Imports */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@300;500;700&display=swap');
+
+/* Global Variables */
+:root {
+  --primary-color: #d4ecff;
+  --text-color: #333;
+  --white: #ffffff;
+  --black: #000000;
+}
+
+/* Base Styles */
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins';
+}
+
+input, textarea, select {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300; /* Light */
+}
+
+/* Button Styles */
+.button {
+  background-color: var(--primary-color);
+  color: var(--black);
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: var(--black);
+  color: var(--white);
+}

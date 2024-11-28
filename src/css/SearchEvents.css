@@ -8,7 +8,6 @@
 
 /* Left Column */
 .search-column {
-  display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
@@ -21,7 +20,6 @@
 
 .search-title {
   font-size: 36px;
-  font-weight: bold;
 }
 
 .search-subtitle {
@@ -64,7 +62,7 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   background: #fff;
-  z-index: 10; /* Ensure it appears above other elements */
+  
 }
 
 .filter-icon:hover + .filter-dropdown {
@@ -93,14 +91,11 @@
   justify-content: center;
   align-items: center;
   height: 200px;
-  background-color: #f0f0f0;
-  border-radius: 8px;
   border: 1px solid #ccc;
 }
 
 .event-card h3 {
   font-size: 20px;
-  color: #333;
 }
 
 /* Load More Button */

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./Navbar.css";
+import "../css/global.css"; 
+import "../css/Navbar.css";
 
 function Navbar() {
   const [searchInput, setSearchInput] = useState("");
