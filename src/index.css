@@ -3,7 +3,6 @@
   font-weight: 400;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
- 
 }
 
 a {
@@ -37,5 +36,4 @@ button {
   font-family: inherit;
   background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
 }

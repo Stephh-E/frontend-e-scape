@@ -1,23 +1,101 @@
-/* Specific styles for Create Event Page */
-.create-event-grid {
+/* Container for the entire form */
+.create-event-container {
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1fr 1fr; /* Wide left column and narrower right column */
   gap: 20px;
   padding: 20px;
 }
 
-.grid-header {
+/* Left column: Event title, theme, and description */
+.left-column {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  gap: 10px; 
 }
 
-.event-title-input {
-  font-size: 26px;
+/* Event Title Section */
+.event-title {
+  width: 100%;
   padding: 10px;
-  width: 30%;
-  border: 1px solid var(--text-color);
+  font-size: 30px;
+  font-weight: bold;
+  border: 1px solid #ccc;
   border-radius: 4px;
 }
 
+.change-theme-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  align-self: flex-start; 
+}
 
+/* Event Description Section */
+.event-description textarea {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Right column: Event details */
+.event-details {
+  display: inline-block;
+  flex-direction: column;
+  padding: 90px;
+}
+
+.event-details label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.event-details input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* RSVP Section */
+.rsvp-options {
+  display: flex;
+  align-items: center;
+}
+
+.rsvp-options input[type="checkbox"] {
+  transform: scale(2.2); 
+}
+
+/* Buttons */
+.save-button,
+.publish-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  margin-right: 10px;
+  margin-top: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #000;
+  color: white;
+  
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .create-event-container {
+    grid-template-columns: 1fr; /* Single-column layout */
+  }
+
+  .publish-button {
+    position: relative;
+    bottom: 0;
+    right: 0;
+  }
+}

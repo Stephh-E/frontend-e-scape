@@ -93,8 +93,8 @@ const CreateEvent = () => {
         </div>
         <div className="grid-footer">
           <div className="buttons">
-            <button className="save-button">Save</button>
-            <button className="publish-button">Publish</button>
+            <button className="save-button">SAVE</button>
+            <button className="publish-button">PUBLISH</button>
           </div>
           <div className="image-placeholder-footer">
           </div>

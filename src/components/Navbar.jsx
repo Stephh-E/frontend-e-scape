@@ -33,7 +33,7 @@ function Navbar() {
     </Link>
   </div>
 
-  {/* Right section: Search bar and profile */}
+  {/* Right section: Search bar and profile signin */}
   <div className="right-section">
     <input
       type="text"
@@ -43,7 +43,7 @@ function Navbar() {
       placeholder="Search Events..."
       className="search-bar"
     />
-    <Link to="/profile" className="profile-link">
+    <Link to="/signin" className="profile-link">
       <i className="fa-solid fa-circle-user fa-1xl"></i>
     </Link>
   </div>

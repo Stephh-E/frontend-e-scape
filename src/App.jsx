@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import SearchEvents from "./components/SearchEvents";
 import CreateEvent from "./components/CreateEvent";
+import SignIn from "./components/SignIn";
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
           <Route exact path="/myevents" element={<h1>My Events</h1>} />
           <Route exact path="/searchevents" element={<SearchEvents />} />
           <Route exact path="/calendar" element={<h1>My Calendar</h1>} />
-          <Route exact path="/profile" element={<h1>Profile Page</h1>} />
+          <Route exact path="/signin" element={<SignIn />} />
       </Routes>
       </main>
     </div>
