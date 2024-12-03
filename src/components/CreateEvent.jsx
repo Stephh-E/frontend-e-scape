@@ -1,109 +1,54 @@
-import React, { useState } from "react";
+import React from "react";
 import "../css/global.css"; 
 import "../css/CreateEvent.css"; 
 
-const CreateEvent = () => {
-  const [eventTitle, setEventTitle] = useState("");
-  const [eventDescription, setEventDescription] = useState("");
-  const [eventWhen, setEventWhen] = useState("");
-  const [eventWhere, setEventWhere] = useState("");
-  const [eventBring, setEventBring] = useState("");
-  const [attendance, setAttendance] = useState("");
 
+function CreateEvent() {
   return (
     <div className="create-event-container">
-      <header className="grid-header">
-        <input
-          type="text"
-          placeholder="Event Title ..."
-          className="event-title-input"
-          value={eventTitle}
-          onChange={(e) => setEventTitle(e.target.value)}
-        />
-        <select className="theme-dropdown">
-          <option>Change theme</option>
-          <option>Theme 1</option>
-          <option>Theme 2</option>
+      <div className="header">
+        <input type="text" placeholder="Event Title ..." className="event-title" />
+        <select className="theme-selector">
+          <option>Change Theme</option>
+          {/* Add more theme options here */}
         </select>
-      </header>
-      <main className="grid-main">
-        <div className="grid-left">
-          <textarea
-            placeholder="Describe your event here..."
-            className="event-description-input"
-            value={eventDescription}
-            onChange={(e) => setEventDescription(e.target.value)}
-          />
-          <div className="image-placeholder">
-          </div>
-        </div>
-        <div className="grid-right">
-          <div className="event-details">
+      </div>
+      <div className="main-content">
+        <textarea className="event-description" placeholder="Describe your event here..."></textarea>
+        <div className="details">
+          <div className="input-group">
             <label>WHEN:</label>
-            <input
-              type="text"
-              className="event-detail-input small"
-              value={eventWhen}
-              onChange={(e) => setEventWhen(e.target.value)}
-            />
+            <input type="text" placeholder="..." />
+          </div>
+          <div className="input-group">
             <label>WHERE:</label>
-            <input
-              type="text"
-              className="event-detail-input small"
-              value={eventWhere}
-              onChange={(e) => setEventWhere(e.target.value)}
-            />
+            <input type="text" placeholder="..." />
+          </div>
+          <div className="input-group">
             <label>BRING:</label>
-            <input
-              type="text"
-              className="event-detail-input small"
-              value={eventBring}
-              onChange={(e) => setEventBring(e.target.value)}
-            />
-          </div>
-          <div className="attendance-options">
-            <label>
-              <input
-                type="radio"
-                value="attending"
-                checked={attendance === "attending"}
-                onChange={(e) => setAttendance(e.target.value)}
-              />
-              Attending
-            </label>
-            <label>
-              <input
-                type="radio"
-                value="maybe"
-                checked={attendance === "maybe"}
-                onChange={(e) => setAttendance(e.target.value)}
-              />
-              Maybe!
-            </label>
-            <label>
-              <input
-                type="radio"
-                value="cant-go"
-                checked={attendance === "cant-go"}
-                onChange={(e) => setAttendance(e.target.value)}
-              />
-              Can't Go
-            </label>
+            <input type="text" placeholder="..." />
           </div>
         </div>
-        <div className="grid-footer">
-          <div className="buttons">
-            <button className="save-button">SAVE</button>
-            <button className="publish-button">PUBLISH</button>
-          </div>
-          <div className="image-placeholder-footer">
-          </div>
+        <div className="image-upload">
+          <img src="/placeholder-image.png" alt="Event" />
         </div>
-      </main>
+      </div>
+      <div className="footer">
+        <div className="attendance">
+          <label><input type="checkbox" /> ATTENDING</label>
+          <label><input type="checkbox" /> MAYBE!</label>
+          <label><input type="checkbox" /> CAN'T GO</label>
+        </div>
+        <div className="buttons">
+          <button className="save-btn">SAVE</button>
+          <button className="publish-btn">PUBLISH</button>
+        </div>
+        <div className="extra-image">
+          <img src="/placeholder-image.png" alt="Event" />
+        </div>
+      </div>
     </div>
   );
-};
+}
 
 export default CreateEvent;
-
-

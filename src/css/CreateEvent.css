@@ -1,101 +1,120 @@
-/* Container for the entire form */
+
 .create-event-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* Wide left column and narrower right column */
-  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 20px;
 }
 
-/* Left column: Event title, theme, and description */
-.left-column {
+.header {
   display: flex;
-  flex-direction: column;
-  gap: 10px; 
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  margin-top: 40px;
 }
 
-/* Event Title Section */
 .event-title {
-  width: 100%;
-  padding: 10px;
-  font-size: 30px;
-  font-weight: bold;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  font-size: 24px;
+  width: 35%;
+  padding: 8px;
+  margin-right: 20%
 }
 
-.change-theme-button {
-  padding: 8px 16px;
-  font-size: 14px;
-  cursor: pointer;
-  border-radius: 4px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  align-self: flex-start; 
+.theme-selector {
+  width: 200px;
+  padding: 8px;
+  font-size: 16px;
 }
 
-/* Event Description Section */
-.event-description textarea {
-  width: 100%;
-  height: 150px;
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-/* Right column: Event details */
-.event-details {
-  display: inline-block;
-  flex-direction: column;
-  padding: 90px;
-}
-
-.event-details label {
-  font-weight: bold;
-  margin-right: 10px;
-}
-
-.event-details input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-/* RSVP Section */
-.rsvp-options {
+.main-content {
   display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.event-description {
+  width: 60%;
+  height: 200px;
+  border: 1px solid grey;
+  padding: 10px;
+  font-size: 16px;
+  margin-right:35px;
+}
+
+.details {
+  width: 30%;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.image-upload img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
-.rsvp-options input[type="checkbox"] {
-  transform: scale(2.2); 
+.attendance {
+  display: flex; 
+  gap: 10px; 
 }
 
-/* Buttons */
-.save-button,
-.publish-button {
+.attendance label {
+  font-size: 16px;
+}
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.save-btn, .publish-btn {
+  background-color: black;
+  color: white;
+  border: none;
   padding: 10px 20px;
   font-size: 16px;
-  font-weight: bold;
-  border: none;
-  margin-right: 10px;
-  margin-top: 10px;
-  border-radius: 4px;
   cursor: pointer;
-  background-color: #000;
-  color: white;
-  
 }
 
-/* Responsive design */
+.save-btn:hover, .publish-btn:hover {
+  background-color: grey;
+}
+
+.extra-image img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+/* Mobile responsiveness */
 @media (max-width: 768px) {
-  .create-event-container {
-    grid-template-columns: 1fr; /* Single-column layout */
+  .container {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    gap: 10px; /* Smaller gap for mobile */
   }
 
-  .publish-button {
-    position: relative;
-    bottom: 0;
-    right: 0;
+  .attendance-options {
+    display: flex;
+    flex-direction: row; /* Align attendance options horizontally */
+    justify-content: space-around;
   }
 }
