@@ -29,9 +29,6 @@ function CreateEvent() {
             <input type="text" placeholder="..." />
           </div>
         </div>
-        <div className="image-upload">
-          <img src="/placeholder-image.png" alt="Event" />
-        </div>
       </div>
       <div className="footer">
         <div className="attendance">
@@ -44,7 +41,7 @@ function CreateEvent() {
           <button className="publish-btn">PUBLISH</button>
         </div>
         <div className="extra-image">
-          <img src="/placeholder-image.png" alt="Event" />
+          <img src="/placeholder-image.png" alt="Image" />
         </div>
       </div>
     </div>
