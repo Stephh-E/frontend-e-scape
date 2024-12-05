@@ -37,7 +37,10 @@ const SearchEvents = () => {
                 onChange={handleFilterChange}>
 
                 <option value="date">Date</option>
-                <option value="category">Category</option>
+                <option value="sports">Sports</option>
+                <option value="music">Music</option>
+                <option value="art">Art</option>
+                <option value="familyfriendly">Family Friendly</option>
                 <option value="location">Location</option>
               </select>
             </div>
