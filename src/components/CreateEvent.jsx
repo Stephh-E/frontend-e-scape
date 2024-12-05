@@ -36,9 +36,9 @@ function CreateEvent() {
           <label><input type="checkbox" /> MAYBE!</label>
           <label><input type="checkbox" /> CAN'T GO</label>
         </div>
-        <div className="buttons">
-          <button className="save-btn">SAVE</button>
-          <button className="publish-btn">PUBLISH</button>
+        <div className="button">
+          <button className="save-buttton">SAVE</button>
+          <button className="publish-button">PUBLISH</button>
         </div>
         <div className="extra-image">
           <img src="/placeholder-image.png" alt="Image" />
