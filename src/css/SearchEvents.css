@@ -43,34 +43,34 @@
   margin-right: 10px;
 }
 
+.filter-icon {
+  background: none;
+  font-size: 16px;
+  cursor: pointer;
+  border:none;
+}
+
 .filter-dropdown-container {
   position: relative;
+  display: inline-block;
 }
 
-.filter-icon {
-  font-size: 24px;
-  cursor: pointer;
-  margin-right: 10px;
-}
-
+/* Hide the dropdown by default */
 .filter-dropdown {
   display: none; 
   position: absolute;
-  top: 30px;
+  top: 40px; /* Adjust dropdown position below the icon */
   left: 0;
-  width: 150px;
-  border: 1px solid #ccc;
+  background: white;
   border-radius: 4px;
-  background: #fff;
-  
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  width: 150px; /* Adjust width as needed */
 }
 
-.filter-icon:hover + .filter-dropdown {
-  display: block; /* Show dropdown on hover */
-}
-
-.filter-dropdown:hover {
-  display: block;
+/* Show dropdown on hover of container */
+.filter-dropdown-container:hover .filter-dropdown {
+  display: block; /* Show dropdown */
 }
 
 /* Events Grid */

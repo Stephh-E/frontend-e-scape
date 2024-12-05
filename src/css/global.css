@@ -9,7 +9,24 @@
   --black: #000000;
 }
 
-/* Base Styles */
+/* Headers */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  margin-top: 40px;
+}
+
+/* Titles */
+.event-title {
+  font-size: 24px;
+  width: 35%;
+  padding: 8px;
+  margin-right: 20%;
+}
+
+/* Body Styles */
 body {
   font-family: 'Inter', sans-serif;
   color: var(--text-color);
@@ -24,7 +41,7 @@ h1, h2, h3, h4, h5, h6 {
 
 input, textarea, select {
   font-family: 'Poppins', sans-serif;
-  font-weight: 300; /* Light */
+  font-weight: 300; 
 }
 
 /* Button Styles */
@@ -34,10 +51,41 @@ input, textarea, select {
   border: none;
   border-radius: 4px;
   padding: 10px 20px;
+  font-size: 16px;
   font-family: 'Poppins', sans-serif;
   cursor: pointer;
 }
 
 .button:hover {
-  background-color: #333;
+  background-color: grey;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  background: #f9f9f9;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 5px;
+  }
+
+  .event-title {
+    margin-top: -50px;
+    width: 90%;
+    font-size: 20px;
+  }
 }
