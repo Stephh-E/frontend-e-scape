@@ -16,7 +16,7 @@ const SearchEvents = () => {
 
   return (
     <div className="search-events-container">
-      {/* New Left Column */}
+      {/* Left Column */}
       <div className="search-column">
         <div className="search-section">
           <h1 className="search-title">Search Events</h1>
