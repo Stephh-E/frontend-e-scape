@@ -30,7 +30,7 @@ const SignIn = () => {
             <option value="familyfriendly">Family Friendly</option>
           </select>
   
-          <button type="submit" className="signup-button">SIGN UP</button>
+          <button type="submit" className="button signup-button">SIGN UP</button>
         </form>
       </div>
     );

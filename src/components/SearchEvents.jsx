@@ -79,7 +79,7 @@ const SearchEvents = () => {
       </div>
 
       <div className="load-more">
-        <button className="load-more-button">LOAD MORE</button>
+        <button className="button load-more-button">LOAD MORE</button>
       </div>
     </div>
   );
