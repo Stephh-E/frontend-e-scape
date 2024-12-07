@@ -64,8 +64,7 @@
   margin-top: 10px;
 }
 
-/* Stack main content vertically */
-  main-content {
+.create-event-container .main-content {
     flex-direction: column;
     justify-content: center;
 }

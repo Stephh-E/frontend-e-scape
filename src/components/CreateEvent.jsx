@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useState} from "react";
 import "../css/global.css";
 import "../css/CreateEvent.css";
 
 function CreateEvent() {
+  const [theme, setTheme] = useState("default");
+  
+    // Handle theme change
+    const handleThemeChange = (e) => {
+      const selectedTheme = e.target.value;
+      setTheme(selectedTheme);
+  
+    // Dynamically load the selected theme's CSS
+    const link = document.getElementById("theme-stylesheet");
+    if (link) {
+      link.href = `/themes/${selectedTheme}.css`;
+    }
+  };
+  
+  
+  
   return (
     <div className="create-event-container">
       <div className="header">
@@ -11,9 +27,14 @@ function CreateEvent() {
           placeholder="Event Title ..."
           className="event-title"
         />
-        <select className="theme-selector">
-          <option>Change Theme</option>
-          {/* Add more theme options here */}
+        <select
+          className="theme-selector"
+          value={theme}
+          onChange={handleThemeChange}
+        >
+          <option value="default">Default Theme</option>
+          <option value="halloween">Halloween</option>
+          <option value="Spiderman">Spiderman</option>
         </select>
       </div>
       <div className="main-content">

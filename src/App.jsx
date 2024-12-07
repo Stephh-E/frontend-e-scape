@@ -5,6 +5,8 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import SearchEvents from "./components/SearchEvents";
 import CreateEvent from "./components/CreateEvent";
 import SignIn from "./components/SignIn";
+<link id="theme-stylesheet" rel="stylesheet" href="/themes/default.css" />
+
 
 function App() {
   return (
@@ -12,7 +14,6 @@ function App() {
       <Navbar/>
       <main>
         <Routes>
-          <Route exact path="/" element={<h1>Sign in Page</h1>} />
           <Route exact path="/events" element={<h1>New Event Page</h1>} />
           <Route exact path="/create" element={<CreateEvent />} />
           <Route exact path="/myevents" element={<h1>My Events</h1>} />
