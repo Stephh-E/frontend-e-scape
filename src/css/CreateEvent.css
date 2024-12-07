@@ -64,11 +64,6 @@
   margin-top: 10px;
 }
 
-.create-event-container .main-content {
-    flex-direction: column;
-    justify-content: center;
-}
-
 .event-description {
   width: 90%;
   margin-bottom: 20px;
