@@ -6,6 +6,7 @@ import SearchEvents from "./components/SearchEvents";
 import CreateEvent from "./components/CreateEvent";
 import SignIn from "./components/SignIn";
 import SavedEvent from "./components/SavedEvent";
+import Calendar from "./components/MyCalendar";
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
           <Route path="/create" element={<CreateEvent />} />
           <Route path="/myevents" element={<h1>My Events</h1>} />
           <Route path="/searchevents" element={<SearchEvents />} />
-          <Route path="/calendar" element={<h1>My Calendar</h1>} />
+          <Route path="/calendar" element={<Calendar />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/saved-event" element={<SavedEvent />} />
       </Routes>
