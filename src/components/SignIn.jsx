@@ -10,6 +10,7 @@ const SignIn = () => {
   };
 
   return (
+    
     <div className="signin-container">
       <form className="signin-form">
         <h1>Create new Account</h1>
@@ -41,7 +42,6 @@ const SignIn = () => {
           <option value="art">Art</option>
           <option value="familyfriendly">Family Friendly</option>
         </select>
-
         <button type="submit" className="button signup-button">
           SIGN UP
         </button>

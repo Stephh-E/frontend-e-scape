@@ -16,10 +16,20 @@ function App() {
 
   },[]);
 
+  const getProtectedRoute = async () => {
+    // Makes API request to "/"
+    let response = await fetch(`${import.meta.env.VITE_AUTH_API_URL}/`)
+    let data = await response.json();
+    console.log(data);
+  }
+
   return (
     <div>
       <Navbar/>
       <main>
+      <button onClick={getProtectedRoute}>
+        Visit protected API route
+      </button>
         <link id="theme-stylesheet" rel="stylesheet" href="/themes/default.css" />
         <Routes>
           <Route path="/events" element={<h1>New Event Page</h1>} />
