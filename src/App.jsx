@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -10,6 +10,14 @@ import Calendar from "./components/MyCalendar";
 
 
 function App() {
+
+  useEffect(() => {
+    console.log(import.meta.env.VITE_AUTH_API_URL);
+
+  },[]);
+
+
+
   return (
     <div>
       <Navbar/>
@@ -22,6 +30,7 @@ function App() {
           <Route path="/searchevents" element={<SearchEvents />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/" element={<SignIn />} />
           <Route path="/saved-event" element={<SavedEvent />} />
       </Routes>
       </main>

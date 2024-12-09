@@ -30,7 +30,7 @@ const SearchEvents = () => {
               placeholder="Search for events..."
             />
             <div className="filter-dropdown-container">
-              <button class="filter-icon">
+              <button className="filter-icon">
               <i className="fa-solid fa-sliders fa-xl filter-icon"></i>
               </button>
               <select
@@ -38,6 +38,7 @@ const SearchEvents = () => {
                 value={filter}
                 onChange={handleFilterChange}>
 
+                <option value="" disabled>Select Filter</option>
                 <option value="date">Date</option>
                 <option value="sports">Sports</option>
                 <option value="music">Music</option>
