@@ -10,13 +10,11 @@ import Calendar from "./components/MyCalendar";
 
 
 function App() {
-
   useEffect(() => {
+    console.log(import.meta.env);
     console.log(import.meta.env.VITE_AUTH_API_URL);
 
   },[]);
-
-
 
   return (
     <div>
