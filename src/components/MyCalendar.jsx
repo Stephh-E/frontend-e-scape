@@ -3,17 +3,14 @@ import "../css/MyCalendar.css";
 import "add-to-calendar-button";
 import React, { useEffect, useState } from "react";
 import { google } from "calendar-link";
-import { ScheduleXCalendar } from "@schedule-x/react";
-import {
-  createViewDay,
-  createViewMonthAgenda,
-  createViewMonthGrid,
-  createViewWeek,
-} from "@schedule-x/calendar";
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment-timezone";
-import "@schedule-x/theme-default/dist/index.css";
 
-function Calendar() {
+// Set up the localizer for react-big-calendar 
+const localizer = momentLocalizer(moment);
+
+function CalendarComponent() {
   const [savedEvent, setSavedEvent] = useState(null);
 
   useEffect(() => {
@@ -22,7 +19,7 @@ function Calendar() {
     if (event) {
       const parsedEvent = JSON.parse(event);
   
-      // Ensure 'when' is in ISO format (if it is not already)
+      // Ensure 'when' is in ISO format 
       const validDate = new Date(parsedEvent.when);
       if (!isNaN(validDate.getTime())) {
         parsedEvent.when = validDate.toISOString(); // Convert to ISO string
@@ -34,8 +31,9 @@ function Calendar() {
       const sydneyTimeZone = "Australia/Sydney";
       const sydneyDate = moment.tz(parsedEvent.when, sydneyTimeZone).format();
       parsedEvent.when = sydneyDate;
-  
-      console.log("Converted Sydney time:", parsedEvent.when); // Log to check Sydney time
+
+      // Log to check Sydney time
+      console.log("Converted Sydney time:", parsedEvent.when); 
 
       setSavedEvent(parsedEvent);
     } else {
@@ -43,24 +41,23 @@ function Calendar() {
     }
   }, []);
 
-  // Debugging: Check if savedEvent is properly set
+  // Check if savedEvent is properly set
   if (!savedEvent) {
     console.log("savedEvent is null or undefined.");
     return <div>No events found. Please create and save an event first.</div>;
   }
 
-  console.log("Rendering with saved event:", savedEvent); // Log to check if savedEvent is being set properly
+  // Log to check if savedEvent is being set properly
+  console.log("Rendering with saved event:", savedEvent); 
 
-  // Transform the savedEvent into the format required by ScheduleXCalendar
+  // Transform the savedEvent into the format required by react-big-calendar
   const calendarEvent = {
-    id: "1", // Unique ID for the event
     title: savedEvent.title || "Untitled Event",
+    start: new Date(savedEvent.when), 
+    end: new Date(new Date(savedEvent.when).getTime() + 60 * 60 * 1000), // adjust as needed
     description: `${savedEvent.description || ""} - Bring: ${savedEvent.bring || "Nothing specified"}`,
-    start: savedEvent.when, // Expecting ISO 8601 datetime format
     location: savedEvent.where || "No location specified",
   };
-
-  console.log("Calendar event:", calendarEvent); // Log to check the final event format
 
   const googleUrl = google({
     title: savedEvent.title,
@@ -69,20 +66,20 @@ function Calendar() {
     location: savedEvent.where,
   });
 
-  // Define views for the calendar
-  const views = [
-    createViewDay(),
-    createViewWeek(),
-    createViewMonthGrid(),
-    createViewMonthAgenda(),
-  ];
-
+  // Render the calendar with react-big-calendar
   return (
     <div>
       <h2>Your Calendar</h2>
-      {/* Display the ScheduleXCalendar with the saved event */}
-      <div className="calendar-container">
-        <ScheduleXCalendar events={[calendarEvent]} views={views} />
+      {/* Display the react-big-calendar with the saved event */}
+      <div className="calendar-container" style={{ height: "80vh" }}>
+        <Calendar
+          localizer={localizer}
+          events={[calendarEvent]}
+          startAccessor="start"
+          endAccessor="end"
+          style={{ height: "100%" }}
+          views={["month", "week", "day"]} 
+        />
       </div>
       <button
         id="addToCalendar"
@@ -94,4 +91,4 @@ function Calendar() {
   );
 }
 
-export default Calendar;
+export default CalendarComponent;
