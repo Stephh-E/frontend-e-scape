@@ -27,9 +27,6 @@ function App() {
     <div>
       <Navbar/>
       <main>
-      <button onClick={getProtectedRoute}>
-        Visit protected API route
-      </button>
         <link id="theme-stylesheet" rel="stylesheet" href="/themes/default.css" />
         <Routes>
           <Route path="/events" element={<h1>New Event Page</h1>} />
