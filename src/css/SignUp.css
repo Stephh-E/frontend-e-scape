@@ -1,0 +1,40 @@
+
+  
+  .signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .signup-form {
+    padding: 2rem;
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  .signup-form h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: black;
+  }
+  
+  .login-text {
+    text-align: center;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  
+  .login-text a {
+    color: red;
+    text-decoration: none;
+  }
+  
+  .login-text a:hover {
+    text-decoration: underline;
+  }
+  
+  
+
+

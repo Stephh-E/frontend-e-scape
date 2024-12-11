@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../css/global.css";
-import "../css/SignIn.css";
+import "../css/Login.css";
 
 const Login = () => {
 
@@ -11,7 +11,7 @@ const Login = () => {
         <h1>Login</h1>
 
         <label htmlFor="name">Name</label>
-        <input type="text" id="name" name="name" placeholder="User" />
+        <input type="text" id="name" name="name" placeholder="Username" />
 
         <label htmlFor="email">Email</label>
         <input type="email" id="email" name="email" placeholder="example@email.com" />

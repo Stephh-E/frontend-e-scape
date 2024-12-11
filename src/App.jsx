@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import SearchEvents from "./components/SearchEvents";
 import CreateEvent from "./components/CreateEvent";
-import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import SavedEvent from "./components/SavedEvent";
 import Calendar from "./components/MyCalendar";
@@ -28,9 +28,7 @@ function App() {
     <div>
       <Navbar/>
       <main>
-      <h1>Test API Button</h1>
-      <button onClick={getHomepage}>Test Homepage Route</button>
-        
+    
         <link id="theme-stylesheet" rel="stylesheet" href="/themes/default.css" />
         <Routes>
           <Route path="/events" element={<h1>New Event Page</h1>} />
@@ -39,7 +37,7 @@ function App() {
           <Route path="/searchevents" element={<SearchEvents />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/saved-event" element={<SavedEvent />} />
       </Routes>
       </main>

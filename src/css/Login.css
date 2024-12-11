@@ -1,24 +1,18 @@
 
   
-  .signin-container {
+  .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
   }
   
-  .signin-form {
+  .login-form {
     padding: 2rem;
     max-width: 400px;
     width: 100%;
   }
   
-  .signin-form h1 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    text-align: center;
-    color: black;
-  }
   
   .login-text {
     text-align: center;
