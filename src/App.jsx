@@ -5,6 +5,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import SearchEvents from "./components/SearchEvents";
 import CreateEvent from "./components/CreateEvent";
 import SignIn from "./components/SignIn";
+import Login from "./components/Login";
 import SavedEvent from "./components/SavedEvent";
 import Calendar from "./components/MyCalendar";
 
@@ -16,17 +17,20 @@ function App() {
 
   },[]);
 
-  const getProtectedRoute = async () => {
+  const getHomepage = async () => {
     // Makes API request to "/"
     let response = await fetch(`${import.meta.env.VITE_AUTH_API_URL}/`)
     let data = await response.json();
-    console.log(data);
-  }
-
+    console.log(data); 
+  };
+  
   return (
     <div>
       <Navbar/>
       <main>
+      <h1>Test API Button</h1>
+      <button onClick={getHomepage}>Test Homepage Route</button>
+        
         <link id="theme-stylesheet" rel="stylesheet" href="/themes/default.css" />
         <Routes>
           <Route path="/events" element={<h1>New Event Page</h1>} />
@@ -34,8 +38,8 @@ function App() {
           <Route path="/myevents" element={<h1>My Events</h1>} />
           <Route path="/searchevents" element={<SearchEvents />} />
           <Route path="/calendar" element={<Calendar />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/" element={<SignIn />} />
           <Route path="/saved-event" element={<SavedEvent />} />
       </Routes>
       </main>
