@@ -32,10 +32,10 @@ const SignUp = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // Handle successful response
+        // Store the username in localStorage
+        localStorage.setItem("username", username);
         alert("User signed up successfully!");
       } else {
-        // Handle error response
         alert(data.message || "Sign-up failed");
       }
     } catch (error) {
