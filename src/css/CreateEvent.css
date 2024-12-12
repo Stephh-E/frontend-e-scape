@@ -68,6 +68,11 @@
   margin-bottom: 200px;
 }
 
+.save-button, .publish-button {
+  margin-right: 8px;
+
+}
+
 @media (max-width: 768px) {
   .main-content {
     flex-direction: column;

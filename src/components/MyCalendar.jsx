@@ -69,9 +69,10 @@ function CalendarComponent() {
   // Render the calendar with react-big-calendar
   return (
     <div>
-      <h2>Your Calendar</h2>
+      
       {/* Display the react-big-calendar with the saved event */}
       <div className="calendar-container" style={{ height: "80vh" }}>
+      <h1>My Calendar</h1>
         <Calendar
           localizer={localizer}
           events={[calendarEvent]}
@@ -81,10 +82,8 @@ function CalendarComponent() {
           views={["month", "week", "day"]} 
         />
       </div>
-      <button
-        id="addToCalendar"
-        onClick={() => window.open(googleUrl, "_blank")}
-      >
+      <button type="addtocal" className="button addtocal button"
+        onClick={() => window.open(googleUrl, "_blank")}>
         Add to Google Calendar
       </button>
     </div>
