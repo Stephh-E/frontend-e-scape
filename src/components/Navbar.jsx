@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../css/global.css";
 import "../css/Navbar.css";
@@ -7,49 +7,38 @@ function Navbar() {
   const [searchInput, setSearchInput] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(false);
-  const [username, setUsername] = useState(null); // State for username
+  const [username, setUsername] = useState(null);
+  const dropdownRef = useRef(null); // Ref for dropdown menu
   const navigate = useNavigate();
 
   useEffect(() => {
     const storedUsername = localStorage.getItem("username");
-    if (storedUsername) {
-      setUsername(storedUsername); // Load the username from localStorage
-    }
+    if (storedUsername) setUsername(storedUsername);
   }, []);
 
-  const handleSearchChange = (event) => {
-    setSearchInput(event.target.value);
-  };
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownVisible(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
-  const handleSearchDoubleClick = () => {
-    navigate("/searchevents");
-  };
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const toggleDropdown = () => setDropdownVisible(!dropdownVisible);
 
   const handleLogout = () => {
-    localStorage.removeItem("username"); // Clear user data from localStorage
-    setUsername(null); // Reset the username state
-    navigate("/login"); // Redirect to login page
+    localStorage.removeItem("username");
+    setUsername(null);
+    navigate("/login");
   };
 
-  const handleRightClick = (event) => {
-    event.preventDefault(); // Prevent default browser context menu
-    setDropdownVisible(true); // Show custom dropdown menu
-  };
+  const handleSearchChange = (event) => setSearchInput(event.target.value);
 
-  const closeDropdown = () => {
-    setDropdownVisible(false); // Hide dropdown menu
-  };
-
-  useEffect(() => {
-    // Close the dropdown when clicking outside
-    const handleClickOutside = () => closeDropdown();
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
+  const handleSearchDoubleClick = () => navigate("/searchevents");
 
   return (
     <nav className="navbar">
@@ -58,13 +47,12 @@ function Navbar() {
         <div className="hamburger-menu" onClick={toggleMenu}>
           <i className="fa-solid fa-bars fa-1xl"></i>
         </div>
-
         <Link to="/calendar" className="calendar-link">
           <i className="fa-solid fa-calendar-days fa-1xl"></i>
         </Link>
       </div>
 
-      {/* Right section: Search bar and profile/signup */}
+      {/* Right section: Search bar and profile */}
       <div className="right-section">
         <input
           type="text"
@@ -76,17 +64,18 @@ function Navbar() {
         />
         {username ? (
           <div className="profile-container">
-            <div className="profile-link">
+            <div className="profile-link" onClick={toggleDropdown}>
               <i className="fa-solid fa-circle-user fa-1xl"></i>
-              <span>{username}</span> {/* Display the username */}
+              <span>{username}</span>
             </div>
-            <button
-              onClick={handleLogout}
-              className="logout-button"
-              aria-label="Logout"
-            >
-              Logout
-            </button>
+
+            {dropdownVisible && (
+              <div className="dropdown-menu" ref={dropdownRef}>
+                <button onClick={handleLogout} className="dropdown-item">
+                  Logout
+                </button>
+              </div>
+            )}
           </div>
         ) : (
           <Link to="/signup" className="profile-link">
@@ -95,7 +84,7 @@ function Navbar() {
         )}
       </div>
 
-      {/* Dropdown Menu (triggered by hamburger) */}
+      {/* Hamburger Dropdown */}
       {menuOpen && (
         <ul className="dropdown-menu">
           <li>
@@ -115,3 +104,4 @@ function Navbar() {
 }
 
 export default Navbar;
+

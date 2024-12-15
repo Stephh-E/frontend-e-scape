@@ -10,6 +10,7 @@
     padding: 2rem;
     max-width: 400px;
     width: 100%;
+    
   }
   
   .signup-form h1 {
@@ -33,7 +34,6 @@
   .login-text a:hover {
     text-decoration: underline;
   }
-  
   
 
 

@@ -1,3 +1,5 @@
+
+
 .navbar {
   display: flex;
   justify-content: space-between; 
@@ -21,13 +23,13 @@ main {
 .left-section {
   display: flex;
   align-items: center;
-  gap: 1rem; /* Space between hamburger and calendar */
+  gap: 1rem; 
 }
 
 .right-section {
   display: flex;
   align-items: center;
-  gap: 1rem; /* Space between search bar and profile icon */
+  gap: 1rem; 
 }
 
 /* Hamburger Menu */
@@ -97,6 +99,3 @@ main {
   padding: 8px 16px;
   cursor: pointer;
 }
-
-
-

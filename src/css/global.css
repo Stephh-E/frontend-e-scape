@@ -4,9 +4,9 @@
 /* Global Variables */
 :root {
   --primary-color: #d4ecff;
-  --text-color: #333;
-  --white: #ffffff;
-  --black: #000000;
+  --text-color: black;
+  --white: white;
+  --black: black;
 }
 
 /* Headers */
@@ -29,7 +29,6 @@
 /* Body Styles */
 body {
   font-family: 'Inter', sans-serif;
-  color: var(--text-color);
   margin: 0;
   padding: 0;
   box-sizing: border-box;
