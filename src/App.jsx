@@ -23,6 +23,22 @@ function App() {
     let data = await response.json();
     console.log(data); 
   };
+
+  const postUserSignUp = async () => {
+    let userDetails = {
+      username: "steph" + Math.floor(Math.random() * 1000),
+      password: "SomeCoolPassword"
+    };
+
+    let response = await fetch(`${import.meta.env.VITE_AUTH_API_URL}/signup`,
+      {
+        method: "POST",
+        body: JSON.stringify(userDetails)
+      }
+    );
+    let data = await response.json();
+    console.log(data);
+  }
   
   return (
     <div>

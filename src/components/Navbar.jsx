@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../css/global.css"; 
+import "../css/global.css";
 import "../css/Navbar.css";
 
 function Navbar() {
   const [searchInput, setSearchInput] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
-  const [username, setUsername] = useState(null);  // Add state to store username
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [username, setUsername] = useState(null); // State for username
   const navigate = useNavigate();
 
   useEffect(() => {
     const storedUsername = localStorage.getItem("username");
     if (storedUsername) {
-      setUsername(storedUsername);  // Set the username from localStorage
+      setUsername(storedUsername); // Load the username from localStorage
     }
   }, []);
 
@@ -28,6 +29,28 @@ function Navbar() {
     setMenuOpen(!menuOpen);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("username"); // Clear user data from localStorage
+    setUsername(null); // Reset the username state
+    navigate("/login"); // Redirect to login page
+  };
+
+  const handleRightClick = (event) => {
+    event.preventDefault(); // Prevent default browser context menu
+    setDropdownVisible(true); // Show custom dropdown menu
+  };
+
+  const closeDropdown = () => {
+    setDropdownVisible(false); // Hide dropdown menu
+  };
+
+  useEffect(() => {
+    // Close the dropdown when clicking outside
+    const handleClickOutside = () => closeDropdown();
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
+
   return (
     <nav className="navbar">
       {/* Left section: Hamburger menu and calendar */}
@@ -41,7 +64,7 @@ function Navbar() {
         </Link>
       </div>
 
-      {/* Right section: Search bar and profile signup */}
+      {/* Right section: Search bar and profile/signup */}
       <div className="right-section">
         <input
           type="text"
@@ -52,9 +75,18 @@ function Navbar() {
           className="search-bar"
         />
         {username ? (
-          <div className="profile-link">
-            <i className="fa-solid fa-circle-user fa-1xl"></i>
-            <span>{username}</span>  {/* Display the username */}
+          <div className="profile-container">
+            <div className="profile-link">
+              <i className="fa-solid fa-circle-user fa-1xl"></i>
+              <span>{username}</span> {/* Display the username */}
+            </div>
+            <button
+              onClick={handleLogout}
+              className="logout-button"
+              aria-label="Logout"
+            >
+              Logout
+            </button>
           </div>
         ) : (
           <Link to="/signup" className="profile-link">

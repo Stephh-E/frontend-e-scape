@@ -80,3 +80,23 @@ main {
   color: #007bff;
 }
 
+.profile-dropdown {
+  position: absolute;
+  top: 500px; 
+  right: 100px;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  list-style: none;
+  padding: 8px 0;
+  z-index: 1000;
+}
+
+.profile-dropdown li {
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+
+
