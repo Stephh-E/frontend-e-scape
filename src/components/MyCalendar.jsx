@@ -64,6 +64,18 @@ function CalendarPage() {
       })
     : "";
 
+    const handleEventSelect = (event) => {
+      setSelectedEvent(event);
+      document.querySelector(".event-details-modal").classList.add("show");
+    };
+
+    const closeModal = () => {
+      setSelectedEvent(null);
+      document.querySelector(".event-details-modal").classList.remove("show");
+    };
+
+    console.log("Google URL:", googleUrl);
+
   return (
     <div className="container">
       <div className="left-column">
@@ -76,7 +88,7 @@ function CalendarPage() {
               <h3>{event.title}</h3>
               <p>{event.description}</p>
             <p>{event.location}</p>
-            <button className="button">
+            <button className="button" onClick={() => handleEventSelect(event)}>
                 View Event
               </button>
             </div>
@@ -90,32 +102,33 @@ function CalendarPage() {
           {/* Calendar Component */}
           <Calendar
             localizer={localizer}
-            events={events} // Use the formatted events here
+            events={events} 
             startAccessor="start"
             endAccessor="end"
             style={{ height: 500 }}
+            onSelectEvent={handleEventSelect}
           />
         </div>
       </div>
 
-      {selectedEvent && (
+      {selectedEvent && googleUrl && (
         <div className="event-details-modal">
-          <h3>{selectedEvent.title}</h3>
-          <p>{selectedEvent.description}</p>
-          <p><strong>Location:</strong> {selectedEvent.location}</p>
-          <p><strong>Start Time:</strong> {selectedEvent.start.toString()}</p>
-          <p><strong>End Time:</strong> {selectedEvent.end.toString()}</p>
-          <a
-            href={googleUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="button"
-          >
-            Add to Google Calendar
-          </a>
-          <button className="button" onClick={() => setSelectedEvent(null)}>
-            Close
-          </button>
+          <div className="model-content">
+            <h3>{selectedEvent.title}</h3>
+            <p>{selectedEvent.description}</p>
+            <p><strong>Location:</strong> {selectedEvent.location}</p>
+            <p><strong>Start Time:</strong> {selectedEvent.start.toString()}</p>
+            <p><strong>End Time:</strong> {selectedEvent.end.toString()}</p>
+            <a
+              href={googleUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="button"
+            >
+              Add to Google Calendar
+            </a>
+            <button onClick={closeModal}>&times;</button>
+          </div>
         </div>
       )}
     </div>
