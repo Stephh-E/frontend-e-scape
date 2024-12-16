@@ -20,6 +20,7 @@ const SignUp = () => {
   // Handle the form submission
   const handleSignUp = async (e) => {
     e.preventDefault();  // Prevent default form submission
+    setLoading(true);
 
     try {
       const response = await fetch(`${import.meta.env.VITE_AUTH_API_URL}/account/signup`, {
@@ -37,7 +38,8 @@ const SignUp = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // Store the username in localStorage
+        // Store the username and JWT in localStorage
+        localStorage.setItem("jwt", data.data.jwt);
         localStorage.setItem("username", username);
         navigate("/calendar");
         setErrorMessage("");

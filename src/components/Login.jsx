@@ -33,7 +33,8 @@ const Login = () => {
       const data = await response.json();
 
       if (response.ok){
-        localStorage.setItem("User", JSON.stringify(data.user));
+        localStorage.setItem("jwt", data.data.jwt);
+        localStorage.setItem("User", data.data.user);
         navigate("/calendar");
         setErrorMessage("");
       } else {
