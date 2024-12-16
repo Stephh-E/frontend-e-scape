@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../css/global.css";
 import "../css/SignUp.css";
 
@@ -6,7 +7,11 @@ const SignUp = () => {
   const [interests, setInterests] = useState(""); 
   const [username, setUsername] = useState(""); 
   const [email, setEmail] = useState(""); 
-  const [password, setPassword] = useState(""); 
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleInterestChange = (e) => {
     setInterests(e.target.value);
@@ -15,6 +20,7 @@ const SignUp = () => {
   // Handle the form submission
   const handleSignUp = async (e) => {
     e.preventDefault();  // Prevent default form submission
+    setLoading(true);
 
     try {
       const response = await fetch(`${import.meta.env.VITE_AUTH_API_URL}/account/signup`, {
@@ -32,14 +38,18 @@ const SignUp = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // Store the username in localStorage
+        // Store the username and JWT in localStorage
+        localStorage.setItem("jwt", data.data.jwt);
         localStorage.setItem("username", username);
-        alert("User signed up successfully!");
+        navigate("/calendar");
+        setErrorMessage("");
       } else {
-        alert(data.message || "Sign-up failed");
+        setErrorMessage(data.message || "Something went wrong. Please try again later.");
       }
     } catch (error) {
       console.error("Error during sign-up:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -96,8 +106,14 @@ const SignUp = () => {
           <option value="art">Art</option>
           <option value="familyfriendly">Family Friendly</option>
         </select>
-        <button type="submit" className="button signup-button">
-          SIGN UP
+        {/* Display error message if it exists */}
+        {errorMessage && (
+          <div className="error-messages">
+            <div className="error-message">{errorMessage}</div>
+          </div>
+        )}
+        <button type="submit" className="button signup-button" disabled={loading}>
+          {loading ? "Logging in..." : "SIGN UP"}
         </button>
       </form>
     </div>

@@ -35,5 +35,15 @@
     text-decoration: underline;
   }
   
+  .error-messages {
+    margin-top: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
-
+  .error-message {
+    color: red;
+    text-align: center;
+    font-size: 1rem;
+  }
