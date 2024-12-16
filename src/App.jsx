@@ -8,13 +8,15 @@ import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import SavedEvent from "./components/SavedEvent";
 import Calendar from "./components/MyCalendar";
+import { useUserAuthContext } from "./contexts/UserAuthContextProvider";
 
 
 function App() {
-  useEffect(() => {
-    console.log(import.meta.env);
-    console.log(import.meta.env.VITE_AUTH_API_URL);
 
+  const [userJwt, setUserJwt] = useUserAuthContext();
+
+  useEffect(() => {
+    console.log(import.meta.env.VITE_AUTH_API_URL);
   },[]);
 
   const getHomepage = async () => {
@@ -33,18 +35,21 @@ function App() {
     let response = await fetch(`${import.meta.env.VITE_AUTH_API_URL}/signup`,
       {
         method: "POST",
-        body: JSON.stringify(userDetails)
+        body: userDetails
       }
     );
     let data = await response.json();
     console.log(data);
+    setUserJwt(data.jwt);
   }
   
   return (
     <div>
       <Navbar/>
       <main>
-    
+        <button onClick={postUserSignUp}>
+          Sign up a user
+        </button>
         <link id="theme-stylesheet" rel="stylesheet" href="/themes/default.css" />
         <Routes>
           <Route path="/events" element={<h1>New Event Page</h1>} />
