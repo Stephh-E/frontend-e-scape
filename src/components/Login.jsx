@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../css/global.css";
 import "../css/Login.css";
 
@@ -7,6 +8,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -31,7 +34,7 @@ const Login = () => {
 
       if (response.ok){
         localStorage.setItem("User", JSON.stringify(data.user));
-        alert("Login successful!");
+        navigate("/calendar");
         setErrorMessage("");
       } else {
         setErrorMessage(data.message || "Something went wrong, please try again.");

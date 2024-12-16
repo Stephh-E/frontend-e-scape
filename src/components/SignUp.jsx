@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../css/global.css";
 import "../css/SignUp.css";
 
@@ -8,6 +9,9 @@ const SignUp = () => {
   const [email, setEmail] = useState(""); 
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleInterestChange = (e) => {
     setInterests(e.target.value);
@@ -35,13 +39,15 @@ const SignUp = () => {
       if (response.ok) {
         // Store the username in localStorage
         localStorage.setItem("username", username);
-        alert("User signed up successfully!");
+        navigate("/calendar");
         setErrorMessage("");
       } else {
         setErrorMessage(data.message || "Something went wrong. Please try again later.");
       }
     } catch (error) {
       console.error("Error during sign-up:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -104,8 +110,8 @@ const SignUp = () => {
             <div className="error-message">{errorMessage}</div>
           </div>
         )}
-        <button type="submit" className="button signup-button">
-          SIGN UP
+        <button type="submit" className="button signup-button" disabled={loading}>
+          {loading ? "Logging in..." : "SIGN UP"}
         </button>
       </form>
     </div>
