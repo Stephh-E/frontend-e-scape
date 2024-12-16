@@ -67,6 +67,7 @@ function CreateEvent() {
           <option value="default">Default Theme</option>
           <option value="halloween">Halloween</option>
           <option value="spiderman">Spiderman</option>
+          <option value="spiderman">Pink</option>
         </select>
       </div>
       <div className="main-content">

@@ -1,5 +1,10 @@
+
 body{
-    --text-color: black;   
-    --background-color: #FF7518; 
-  }
-  
+  --text-color: black;
+  background-color: orangered;
+  background-image: url('assets/halloweenTheme/Pumpkin.png');
+  background-size: 45%;
+  background-repeat: no-repeat; 
+
+}
+
