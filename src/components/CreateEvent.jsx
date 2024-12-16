@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/global.css";
 import "../css/CreateEvent.css";
@@ -68,7 +68,7 @@ function CreateEvent() {
           <option value="halloween">Halloween</option>
           <option value="spiderman">Spiderman</option>
           <option value="pink">Pink</option>
-          <option value="pink">Blue</option>
+          <option value="blue">Blue</option>
         </select>
       </div>
       <div className="main-content">
