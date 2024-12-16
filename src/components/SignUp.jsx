@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../css/global.css";
 import "../css/SignUp.css";
 
@@ -6,7 +6,8 @@ const SignUp = () => {
   const [interests, setInterests] = useState(""); 
   const [username, setUsername] = useState(""); 
   const [email, setEmail] = useState(""); 
-  const [password, setPassword] = useState(""); 
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleInterestChange = (e) => {
     setInterests(e.target.value);
@@ -35,8 +36,9 @@ const SignUp = () => {
         // Store the username in localStorage
         localStorage.setItem("username", username);
         alert("User signed up successfully!");
+        setErrorMessage("");
       } else {
-        alert(data.message || "Sign-up failed");
+        setErrorMessage(data.message || "Something went wrong. Please try again later.");
       }
     } catch (error) {
       console.error("Error during sign-up:", error);
@@ -96,6 +98,12 @@ const SignUp = () => {
           <option value="art">Art</option>
           <option value="familyfriendly">Family Friendly</option>
         </select>
+        {/* Display error message if it exists */}
+        {errorMessage && (
+          <div className="error-messages">
+            <div className="error-message">{errorMessage}</div>
+          </div>
+        )}
         <button type="submit" className="button signup-button">
           SIGN UP
         </button>
