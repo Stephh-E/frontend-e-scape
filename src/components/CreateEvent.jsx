@@ -6,11 +6,12 @@ import "../css/CreateEvent.css";
 function CreateEvent() {
   const [theme, setTheme] = useState("default");
   const [eventData, setEventData] = useState({
-    title: "",
+    eventName: "",
     description: "",
-    when: "",
-    where: "",
-    bring: "",
+    eventDate: "",
+    location: "",
+    host: "",
+    invited: "",
   });
 
   const navigate = useNavigate();
@@ -79,7 +80,7 @@ function CreateEvent() {
           type="text"
           placeholder="Event Title ..."
           className="event-title"
-          name="title"
+          name="eventName"
           value={eventData.title}
           onChange={handleInputChange}
         />
@@ -109,7 +110,7 @@ function CreateEvent() {
             <input
               type="text"
               placeholder="..."
-              name="when"
+              name="eventDate"
               value={eventData.when}
               onChange={handleInputChange}
             />
