@@ -25,6 +25,7 @@ EventScape is a modern, customisable app designed to simplify event planning and
 EventScape's focus on privacy, creativity and community engagement makes it ideal for individuals and groups seeking a unique and user-friendly way to organise events, from casual gatherings to larger-scale activites.
 
 ## Core Features
+
 # Event Creation:
 
 Add event name, date, time, location, and description.
