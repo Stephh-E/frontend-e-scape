@@ -48,8 +48,10 @@ Search page to browse public events based on filters (categories, location, date
 
 Customisable privacy settings for profiles and events
 Ability to hide personal information
+
 ## Mobile Optimisation:
 A mobile-first design to ensure smooth event creation and discovery on smartphones.
+
 # Expanded Features
 
 ## Advanced Customisation:
