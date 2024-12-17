@@ -42,12 +42,36 @@ function CreateEvent() {
     navigate("/saved-event"); // Redirect to saved event page
   };
 
-  // Handle publishing the event (need to add backend logic)
-  const handlePublish = () => {
-    handleSave(); // Handle publishing the event (same as save for now)
-    alert("Event Published with theme: " + theme);
-  };
+  // Handle publishing the event
+  const handlePublish =  async () => {
+    try {
+      // Prepare data to send to the backend
+      const eventDataToSend = { ...eventData, theme };
 
+      // Make a POST request to backend API
+      const response = await fetch("http://localhost:3000/event/create", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(eventDataToSend),
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          console.log("Event created successfully:", result);
+          alert("Event Published Successfully!");
+          navigate("/saved-event"); // Redirect after success
+        } else {
+          console.error("Failed to publish event");
+          alert("Failed to publish event. Please try again.");
+        }
+      } catch (error) {
+        console.error("Error publishing event:", error);
+        alert("An error occurred while publishing the event.");
+      }
+    };
+    
   return (
     <div className="create-event-container">
       <div className="header">
