@@ -1,6 +1,6 @@
 ## EventScape: Event Management Social Platform
 # Links
-# Github Repositories
+## Github Repositories
 Frontend: https://github.com/Stephh-E/frontend-e-scape
 Backend: https://github.com/hsc996/EventScape
 
