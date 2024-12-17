@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import "../css/global.css"; 
 import '../css/SearchEvents.css';  
 
@@ -7,6 +7,7 @@ const SearchEvents = () => {
   const [filter, setFilter] = useState("");
   const [events, setEvents] = useState([]); // State to store fetched events
   const [error, setError] = useState(null); // State to handle errors
+  const [jwt, setJwt] = useState(localStorage.getItem("jwt") || "");
   
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -27,11 +28,12 @@ const SearchEvents = () => {
 
       // Make GET request to backend using fetch
       const response = await fetch(
-        `http://localhost:5000/public?query=${encodeURIComponent(searchQuery)}`,
+        `${import.meta.env.VITE_AUTH_API_URL}/search/public?query=${encodeURIComponent(searchQuery)}`,
         {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            ...(jwt && { Authorization: `Bearer ${jwt}` })
           },
         }
       );
@@ -44,6 +46,13 @@ const SearchEvents = () => {
 
       // Parse and update events state
       const data = await response.json();
+      
+      if (data.data.jwt) {
+        const token = data.data.jwt;
+        setJwt(token);
+        localStorage.setItem("jwt", token);
+      }
+
       setEvents(data.data);
     } catch (err) {
       console.error("Error fetching events:", err);
