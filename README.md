@@ -1,6 +1,9 @@
 ## EventScape: Event Management Social Platform
+
 # Links
+
 ## Github Repositories
+
 Frontend: https://github.com/Stephh-E/frontend-e-scape
 Backend: https://github.com/hsc996/EventScape
 
@@ -11,6 +14,7 @@ Frontend: (Netlify) https://eventscape1.netlify.app/
 Development: (Render) https://eventscape-43t2.onrender.com
 
 # Contributors
+
 Steph Elsley: User Stories, Wireframes
 
 Hannah Scaife: Data Flow Diagram, App Architechture Diagram
@@ -18,6 +22,7 @@ Hannah Scaife: Data Flow Diagram, App Architechture Diagram
 Note: Research and website description completed by both contributors.
 
 # About EventScape
+
 EventScape is a modern, customisable app designed to simplify event planning and invitations. Its offers a private, visually engaging platform where users can host, discover and personalise events with creative themes inspired by Bebo's customisation features. We've integrated the Google Calendar in order to further streamline event scheduling, making it an intuitive alternative to traditional platforms like Facebook Events.
 
 EventScape's focus on privacy, creativity and community engagement makes it ideal for individuals and groups seeking a unique and user-friendly way to organise events, from casual gatherings to larger-scale activites.
@@ -30,11 +35,17 @@ Add event name, date, time, location, and description.
 Pre-set templates and colour schemes for quick customisation.
 Options to set events as Public and Private
 User can track what events they’re attending on the My Calendar page
+
 ## RSVP and Guest Management:
+
 Simple RSVP system for attendees, they can pick attending, maybe or cannot attend
+
 ## Event Discovery:
+
 Search page to browse public events based on filters (categories, location, date)
+
 ## Privacy and Security:
+
 Customisable privacy settings for profiles and events
 Ability to hide personal information
 ## Mobile Optimisation:
