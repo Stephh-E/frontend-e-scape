@@ -14,9 +14,8 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    setErrorMessage("");
-
-    setLoading(true);
+    setErrorMessage(""); // Reset error message
+    setLoading(true); // Show loading spinner or text
 
     try {
       const response = await fetch(`${import.meta.env.VITE_AUTH_API_URL}/account/signin`, {
@@ -25,31 +24,33 @@ const Login = () => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          email,
-          password
-        })
+          email,  
+          password,
+        }),
       });
 
       const data = await response.json();
 
-      if (response.ok){
+      if (response.ok) {
+        // On successful login, store the JWT and email
         localStorage.setItem("jwt", data.data.jwt);
-        localStorage.setItem("User", data.data.user);
-        navigate("/calendar");
-        setErrorMessage("");
+        localStorage.setItem("email", email);
+
+        // Redirect to the New Event page after login
+        navigate("/new-event");
+        setErrorMessage(""); // Reset error message
       } else {
-        setErrorMessage(data.message || "Something went wrong, please try again.");
+        setErrorMessage(data.message || "Invalid credentials, please try again.");
       }
     } catch (error) {
       console.error("An error occurred during login: ", error);
-      setErrorMessage("An error occurred while trying to login. Please try again later")
+      setErrorMessage("An error occurred while trying to login. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    
     <div className="login-container">
       <form className="login-form" onSubmit={handleLogin}>
         <h1>Login</h1>
@@ -71,15 +72,18 @@ const Login = () => {
           name="password"
           placeholder="******"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}/>
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
         {/* Display error message if it exists */}
         {errorMessage && (
           <div className="error-messages">
             <div className="error-message">{errorMessage}</div>
           </div>
         )}
+
         <button type="submit" className="button login-button" disabled={loading}>
-        {loading ? "Logging in..." : "LOGIN"}
+          {loading ? "Logging in..." : "LOGIN"}
         </button>
       </form>
     </div>

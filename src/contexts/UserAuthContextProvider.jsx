@@ -1,20 +1,24 @@
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
-export const UserAuthContext = createContext("");
+const UserAuthContext = createContext();
 
-export function useUserAuthContext(){
-    return useContext(UserAuthContext);
-}
+// Custom hook to use the context
+export const useUserAuthContext = () => {
+  const context = useContext(UserAuthContext);
+  if (!context) {
+    throw new Error("useUserAuthContext must be used within a UserAuthContextProvider");
+  }
+  return context;
+};
 
-export function UserAuthContextProvider({children}){
+// Provider component
+export const UserAuthContextProvider = ({ children }) => {
+  const [userJwt, setUserJwt] = useState(null);  // Initial state for the JWT
 
-    let [userJwt, setUserJwt] = useState("");
+  return (
+    <UserAuthContext.Provider value={[userJwt, setUserJwt]}>
+      {children}
+    </UserAuthContext.Provider>
+  );
+};
 
-    //load into local storage
-
-    return(
-        <UserAuthContext.Provider value={[userJwt, setUserJwt]}>
-            {children}
-        </UserAuthContext.Provider>
-    )
-}
