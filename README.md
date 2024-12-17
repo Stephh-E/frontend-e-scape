@@ -162,6 +162,11 @@ WireframesMobile
 
 Our team has utilised the Agile planning methodology with Trello to efficiently manage our application development process. We've structured our workflow with "To Do," "In Progress," and "Completed" card lists to maintain clear organisation. Each task card includes due dates, relevant links, detailed checklists, and member assignments, ensuring accountability and streamlined collaboration.
 
+# Changes and Updates to Part A 
+In creating EventScape, we made some significant changes to the initial plan in Part A.
+
+For the **wireframes** The main change made was to the Create Event page, which I paired back due to the timeframe. I simplified the css to have just a colour scheme and background picture rather then the choice of mulitple images I intended to have. (insert screenshot of browser page here)
+
 # REFERENCES
 GeeksforGeeks (2024) Event Management Web App using MERN, GeeksforGeeks [Preprint]. Available at: https://doi.org/10/2628/2963/7726/7835.
 
