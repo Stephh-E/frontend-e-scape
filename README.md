@@ -1,109 +1,100 @@
-EventScape: Event Management Social Platform
-Links
-Github Repositories
+## EventScape: Event Management Social Platform
+# Links
+# Github Repositories
 
 Frontend: https://github.com/Stephh-E/frontend-e-scape
 
 Backend: https://github.com/hsc996/EventScape
 
-Deployment
+# Deployment
 
 Frontend: (Netlify) https://eventscape1.netlify.app/
 
 Development: (Render) https://eventscape-43t2.onrender.com
 
-Contributors
+## Contributors
 Steph Elsley: User Stories, Wireframes
 
 Hannah Scaife: Data Flow Diagram, App Architechture Diagram
 
 Note: Research and website description completed by both contributors.
 
-About EventScape
+## About EventScape
 EventScape is a modern, customisable app designed to simplify event planning and invitations. Its offers a private, visually engaging platform where users can host, discover and personalise events with creative themes inspired by Bebo's customisation features. We've integrated the Google Calendar in order to further streamline event scheduling, making it an intuitive alternative to traditional platforms like Facebook Events.
 
 EventScape's focus on privacy, creativity and community engagement makes it ideal for individuals and groups seeking a unique and user-friendly way to organise events, from casual gatherings to larger-scale activites.
 
-Core Features
-Event Creation:
+## Core Features
+# Event Creation:
 
 Add event name, date, time, location, and description.
 Pre-set templates and colour schemes for quick customisation.
 Options to set events as Public and Private
 User can track what events they’re attending on the My Calendar page
-RSVP and Guest Management:
-
+# RSVP and Guest Management:
 Simple RSVP system for attendees, they can pick attending, maybe or cannot attend
-Event Discovery:
-
+# Event Discovery:
 Search page to browse public events based on filters (categories, location, date)
-Privacy and Security:
-
+# Privacy and Security:
 Customisable privacy settings for profiles and events
 Ability to hide personal information
-Mobile Optimisation:
-
+# Mobile Optimisation:
 A mobile-first design to ensure smooth event creation and discovery on smartphones.
-Expanded Features
-Advanced Customisation:
+## Expanded Features
 
+# Advanced Customisation:
 Drag-and-drop editor for deeper event page personalisation.
 Upload custom-made images or themes for event invites.
-Google Calendar Integration:
-
+# Google Calendar Integration:
 Sync events to personal calendars using the Google Calendar API.
 Receive notifications and reminders directly from the calendar.
-Recurring Events:
-
+# Recurring Events:
 Options to set up weekly, monthly, or custom recurring events.
-Social Sharing:
-
+# Social Sharing:
 Generate shareable links for public events.
 Integrated sharing to other platforms (e.g., Instagram, Twitter).
-Community Features:
-
+# Community Features:
 Event ratings and reviews to build trust for public events.
 User communities or groups for niche interests (e.g., musicians, families).
-Target Audience
+
+## Target Audience
 The app is designed for individuals and small communities seeking a fresh alternative to traditional event platforms like Facebook.
 
 Key demographics include:
 
-Young Creatives and Professionals:
-
+# Young Creatives and Professionals:
 Musicians, artists, designers, and students looking for modern, visually engaging ways to host and find events. This includes personas like Blake and Mia, who value style and ease of use.
-Local Businesses and Event Hosts:
 
+# Local Businesses and Event Hosts:
 Bar managers, community leaders, and small business owners who need quick, professional event creation tools. This includes personas like Liam, who regularly host public events.
-Families and Community Organisers:
 
+# Families and Community Organisers:
 Parents, planners, and educators looking for safe, family-friendly event platforms. This includes personas like Sarah, who prioritise privacy and child-appropriate content.
-Tech Stack
+
+## Tech Stack
 The app is built using the MERN stack (MongoDB, Express.js, React, and Node.js) for a scalable, dynamic, and mobile-responsive experience. Additional integrations enhance functionality and user engagement.
 
-Frontend:
-
+# Frontend:
 Framework: React
 Routing: React Router DOM
 Styling: Font Awesome, Flexbox
 Build Tool: Vite
-Backend:
 
+# Backend:
 Framework: Node.js, Express.js
 Database: MongoDB Atlas, managed with Mongoose
 Authentication & Security: bcrypt, jsonwebtoken, helmet
-Third-Party API Integration
 
+# Third-Party API Integration
 Google Calendar API, Google's OAuth 2.0 flow.
-Deployment:
 
+# Deployment:
 Front-End: Netlify
 Back-End: Render
-Version Control:
 
+# Version Control:
 Git and GitHub for collaborative development.
-Development Tools:
-
+# Development Tools:
 Build & Development: Vite, Nodemon
 Linting: ESLint with React-specific plugins
 Data Flow Diagram
