@@ -1,14 +1,47 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import "../css/global.css"; 
 import '../css/SearchEvents.css';  
 
 const SearchEvents = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filter, setFilter] = useState("");
-  const [events, setEvents] = useState([]); // State to store fetched events
-  const [error, setError] = useState(null); // State to handle errors
+  const [events, setEvents] = useState([]);
+  const [error, setError] = useState(null); 
   const [jwt, setJwt] = useState(localStorage.getItem("jwt") || "");
+
+    // useEffect to populate event cards when component mounts
+
+    useEffect(() => {
+      const fetchAllEvents = async () => {
+        try {
+          setError(null);
   
+          const url = `${import.meta.env.VITE_AUTH_API_URL}/search/public/all`;
+          const response = await fetch(url, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            }
+          });
+ 
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || "Failed to fetch events.");
+          }
+  
+          const data = await response.json();
+          setEvents(data.data);
+  
+        } catch (err) {
+          console.error("Error fetching events:", err);
+          setError(err.message || "An unexpected error occurred.");
+        }
+      };
+  
+      fetchAllEvents(); // Call fetch function when component is mounted
+    }, []);
+  
+
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
@@ -63,6 +96,14 @@ const SearchEvents = () => {
     }
   };
 
+  const truncateDescription = (description) => {
+    const words = description.split(' ');
+    if (words.length > 15) {
+      return words.slice(0, 20).join(' ') + '...';
+    }
+    return description;
+  };
+
   return (
     <div className="search-events-container">
       {/* Left Column */}
@@ -114,13 +155,13 @@ const SearchEvents = () => {
             <div className="event-column" key={index}>
               <div className="event-card">
                 <h3>{event.eventName}</h3>
-                <div>{event.description}</div>
-                <p>
+                <p>{truncateDescription(event.description)}</p>
+                <span>
                   <strong>Where:</strong> {event.location}
-                </p>
-                <p>
+                </span>
+                <span>
                   <strong>When:</strong> {event.eventDate}
-                </p>
+                </span>
               </div>
             </div>
           ))
