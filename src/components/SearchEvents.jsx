@@ -26,9 +26,12 @@ const SearchEvents = () => {
     try {
       setError(null); // Reset error state before new request
 
+      // Inregrate the filter if applicable
+      const filterQuery = filter ? `&category=${encodeURIComponent(filter)}` : '';
+      const url = `${import.meta.env.VITE_AUTH_API_URL}/search/public?query=${encodeURIComponent(searchQuery)}${filterQuery}`;
+
       // Make GET request to backend using fetch
-      const response = await fetch(
-        `${import.meta.env.VITE_AUTH_API_URL}/search/public?query=${encodeURIComponent(searchQuery)}`,
+      const response = await fetch(url,
         {
           method: "GET",
           headers: {
@@ -110,13 +113,13 @@ const SearchEvents = () => {
           events.map((event, index) => (
             <div className="event-column" key={index}>
               <div className="event-card">
-                <h3>{event.title}</h3>
-                <p>{event.description}</p>
+                <h3>{event.eventName}</h3>
+                <div>{event.description}</div>
                 <p>
-                  <strong>Where:</strong> {event.where}
+                  <strong>Where:</strong> {event.location}
                 </p>
                 <p>
-                  <strong>When:</strong> {event.when}
+                  <strong>When:</strong> {event.eventDate}
                 </p>
               </div>
             </div>
