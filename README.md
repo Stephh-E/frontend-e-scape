@@ -170,7 +170,6 @@ For the **wireframes** The main change made was to the Create Event page, which 
 # Continued planning and updated Trello progress
 We continued with the agile kanban methodology to keep track of our progress and what was still left to do. Tasks were broken into smaller, manageable components (e.g., "Test CRUD operations," "Create Theme Toggle logic"), aligning with Agile's emphasis on delivering value iteratively. Agile sprints are represented through soft deadlines we set on tasks, promoting a focus on short-term goals.Continuous testing can also been seen in our process. Please see screenshots below:
 
-<img width="855" alt="Screenshot 2024-12-09 at 1 23 02 PM" src="https://github.com/user-attachments/assets/2b7872e4-48a2-45b7-bcfb-4e4666e171d7" />
 ![image](https://github.com/user-attachments/assets/e8189706-806f-45e9-af9d-fd5acd054bf4)
 
 
