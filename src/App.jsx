@@ -44,11 +44,16 @@ function App() {
     console.log(data);
     setUserJwt(data.jwt);
   }
+
+  useEffect(() => {
+    console.log("JWT changed in state. It's value is now" + userJwt);
+  }, [userJwt]);
   
   return (
     <div>
       <Navbar/>
       <main>
+        <h1 data-testid="jwt header">[userJwt]</h1>
         <button onClick={postUserSignUp}>
           Sign up a user
         </button>
