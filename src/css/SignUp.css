@@ -47,3 +47,24 @@
     text-align: center;
     font-size: 1rem;
   }
+
+  /* Ensuring inputs and the select field are the same width */
+.signup-form input[type="text"],
+.signup-form input[type="password"],
+.signup-form input[type="email"],
+.signup-form select {
+  width: 100%; 
+  padding: 0.8rem;  
+  margin-bottom: 1rem;  
+  border-radius: 5px;  
+  border: 1px solid #ccc;  
+  box-sizing: border-box; 
+}
+
+  .signup-form select {
+    -webkit-appearance: none;  
+    -moz-appearance: none;
+    appearance: none;
+    background-size: 12px;
+    
+  }

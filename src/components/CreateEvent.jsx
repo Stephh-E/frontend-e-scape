@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/global.css";
 import "../css/CreateEvent.css";
+import { useUserAuthContext } from "../contexts/UserAuthContextProvider";
 
 function CreateEvent() {
   const [theme, setTheme] = useState("default");
@@ -10,11 +11,12 @@ function CreateEvent() {
     description: "",
     eventDate: "",
     location: "",
-    host: "",
+    host: "", 
     invited: "",
   });
 
   const navigate = useNavigate();
+  const { userJwt } = useUserAuthContext(); // Access the user context
 
   useEffect(() => {
     // Dynamically update the theme
@@ -44,35 +46,41 @@ function CreateEvent() {
   };
 
   // Handle publishing the event
-  const handlePublish =  async () => {
+  const handlePublish = async () => {
+    const userId = userJwt?.userId;
+    if (!userJwt) {
+      alert("User is not authenticated.");
+      return;
+    }
+
     try {
-      // Prepare data to send to the backend
-      const eventDataToSend = { ...eventData, theme };
+      // Prepare event data with host (userId) and theme
+      const eventDataToSend = { ...eventData, theme, host: userJwt };
 
       // Make a POST request to backend API
       const response = await fetch("http://localhost:3000/event/create", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(eventDataToSend),
-        });
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(eventDataToSend),
+      });
 
-        if (response.ok) {
-          const result = await response.json();
-          console.log("Event created successfully:", result);
-          alert("Event Published Successfully!");
-          navigate("/saved-event"); // Redirect after success
-        } else {
-          console.error("Failed to publish event");
-          alert("Failed to publish event. Please try again.");
-        }
-      } catch (error) {
-        console.error("Error publishing event:", error);
-        alert("An error occurred while publishing the event.");
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Event created successfully:", result);
+        alert("Event Published Successfully!");
+        navigate("/saved-event"); // Redirect after success
+      } else {
+        console.error("Failed to publish event");
+        alert("Failed to publish event. Please try again.");
       }
-    };
-    
+    } catch (error) {
+      console.error("Error publishing event:", error);
+      alert("An error occurred while publishing the event.");
+    }
+  };
+
   return (
     <div className="create-event-container">
       <div className="header">
@@ -81,7 +89,7 @@ function CreateEvent() {
           placeholder="Event Title ..."
           className="event-title"
           name="eventName"
-          value={eventData.title}
+          value={eventData.eventName}
           onChange={handleInputChange}
         />
         <select
@@ -111,7 +119,7 @@ function CreateEvent() {
               type="text"
               placeholder="..."
               name="eventDate"
-              value={eventData.when}
+              value={eventData.eventDate}
               onChange={handleInputChange}
             />
           </div>
@@ -120,8 +128,8 @@ function CreateEvent() {
             <input
               type="text"
               placeholder="..."
-              name="where"
-              value={eventData.where}
+              name="location"
+              value={eventData.location}
               onChange={handleInputChange}
             />
           </div>
@@ -131,7 +139,7 @@ function CreateEvent() {
               type="text"
               placeholder="..."
               name="bring"
-              value={eventData.bring}
+              value={eventData.bring || ""}
               onChange={handleInputChange}
             />
           </div>
@@ -146,3 +154,4 @@ function CreateEvent() {
 }
 
 export default CreateEvent;
+

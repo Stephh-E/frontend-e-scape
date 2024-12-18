@@ -8,12 +8,14 @@ import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import SavedEvent from "./components/SavedEvent";
 import Calendar from "./components/MyCalendar";
+import NewEvent from "./components/NewEvent";
 import { useUserAuthContext } from "./contexts/UserAuthContextProvider";
 
 
 function App() {
 
   const [userJwt, setUserJwt] = useUserAuthContext();
+  console.log("userJwt and setUserJwt:", userJwt, setUserJwt);
 
   useEffect(() => {
     console.log(import.meta.env.VITE_AUTH_API_URL);
@@ -60,6 +62,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/saved-event" element={<SavedEvent />} />
+          <Route path="/new-event" element ={<NewEvent />} ></Route>
       </Routes>
       </main>
     </div>
