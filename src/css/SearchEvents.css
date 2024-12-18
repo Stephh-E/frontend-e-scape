@@ -104,15 +104,29 @@
 
 .event-card {
   display: flex;
+  text-align: center;
   justify-content: center;
   align-items: center;
-  height: 200px;
+  height: 225px;
+  word-wrap: break-word;
   border: 1px solid grey;
 }
 
-.event-card h3 {
-  font-size: 20px;
+.event-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
+
+.search-events-container .event-card > h3 {
+  font-size: 1.25em;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.event-card p {
+  font-size: 0.9em;
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
