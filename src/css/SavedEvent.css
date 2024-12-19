@@ -5,3 +5,16 @@
     padding: 20px;
     border-radius: 8px;
   }
+
+  .attendance-buttons button {
+    margin: 0.5em;
+    padding: 0.5em 1em;
+    cursor: pointer;
+  }
+  
+  .attendance-buttons button.selected {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+  }
+  

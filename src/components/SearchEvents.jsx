@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import "../css/global.css"; 
 import '../css/SearchEvents.css';  
@@ -8,6 +10,9 @@ const SearchEvents = () => {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null); 
   const [jwt, setJwt] = useState(localStorage.getItem("jwt") || "");
+
+  const navigate = useNavigate();
+  
 
 
     // useEffect to populate event cards when component mounts
@@ -98,6 +103,13 @@ const SearchEvents = () => {
     }
   };
 
+  const handleEventClick = (event) => {
+    // Save the selected event to local storage
+    localStorage.setItem("savedEvent", JSON.stringify(event));
+    // Navigate to the SavedEvent page
+    navigate("/saved-event");
+  };
+
   const truncateDescription = (description) => {
     const words = description.split(' ');
     if (words.length > 15) {
@@ -154,7 +166,11 @@ const SearchEvents = () => {
         ) : events.length > 0 ? (
           // Events found - display the list
           events.map((event, index) => (
-            <div className="event-column" key={index}>
+            <div 
+              className="event-column" 
+              key={index}
+              onClick={() => handleEventClick(event)}
+            >
               <div className="event-card">
                 <h3>{event.eventName}</h3>
                 <p>{truncateDescription(event.description)}</p>
