@@ -60,6 +60,7 @@ function App() {
           <Route path="/searchevents" element={<SearchEvents />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/saved-event" element={<SavedEvent />} />
           <Route path="/new-event" element={<NewEvent />} ></Route>
