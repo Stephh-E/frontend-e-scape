@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { google } from "calendar-link";
+import { useUserAuthContext } from "../contexts/UserAuthContextProvider";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment-timezone";
@@ -13,20 +14,19 @@ function CalendarPage() {
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [userJwt] = useUserAuthContext();
 
   useEffect(() => {
     fetchEvents();
   }, []);
 
   const fetchEvents = async () => {
-    const token = localStorage.getItem("jwt");
-
     try {
       const response = await fetch(`${import.meta.env.VITE_AUTH_API_URL}/event/attending`, 
         {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${userJwt.token}`,
             "Content-Type": "application/json",
           },
         }
