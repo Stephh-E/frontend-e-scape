@@ -9,6 +9,7 @@ const SearchEvents = () => {
   const [error, setError] = useState(null); 
   const [jwt, setJwt] = useState(localStorage.getItem("jwt") || "");
 
+
     // useEffect to populate event cards when component mounts
 
     useEffect(() => {
@@ -56,10 +57,11 @@ const SearchEvents = () => {
       return;
     }
 
+    
     try {
       setError(null); // Reset error state before new request
 
-      // Inregrate the filter if applicable
+      // Intregrate the filter if applicable
       const filterQuery = filter ? `&category=${encodeURIComponent(filter)}` : '';
       const url = `${import.meta.env.VITE_AUTH_API_URL}/search/public?query=${encodeURIComponent(searchQuery)}${filterQuery}`;
 

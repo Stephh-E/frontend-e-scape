@@ -16,6 +16,7 @@
     "add-to-calendar-button": "^2.7.3",
     "calendar-link": "^2.7.0",
     "flexbox": "^0.0.3",
+    "jwt-decode": "^4.0.0",
     "moment-timezone": "^0.5.46",
     "preact": "^10.25.1",
     "react": "^18.3.1",

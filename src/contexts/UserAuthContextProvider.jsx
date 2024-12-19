@@ -1,19 +1,41 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
 
-const UserAuthContext = createContext();
+export const UserAuthContext = createContext();
 
-// Custom hook to use the context
 export const useUserAuthContext = () => {
-  const context = useContext(UserAuthContext);
-  if (!context) {
-    throw new Error("useUserAuthContext must be used within a UserAuthContextProvider");
-  }
-  return context;
+  return useContext(UserAuthContext);
 };
 
-// Provider component
 export const UserAuthContextProvider = ({ children }) => {
-  const [userJwt, setUserJwt] = useState(null);  // Initial state for the JWT
+  const [userJwt, setUserJwt] = useState(() => {
+    const storedJwt = localStorage.getItem("jwt");
+    
+    if (storedJwt) {
+      try {
+        const decodedJwt = jwtDecode(storedJwt);
+        console.log("Decoded JWT:", decodedJwt);
+        return { 
+          token: storedJwt, 
+          email: localStorage.getItem("email"), 
+          userId: decodedJwt.userId || decodedJwt.sub
+        };
+      } catch (error) {
+        return null;
+      }
+    }
+    return null;
+  });
+
+  useEffect(() => {
+    if (userJwt) {
+      localStorage.setItem("jwt", userJwt.token);
+      localStorage.setItem("email", userJwt.email);
+    } else {
+      localStorage.removeItem("jwt");
+      localStorage.removeItem("email");
+    }
+  }, [userJwt]);
 
   return (
     <UserAuthContext.Provider value={[userJwt, setUserJwt]}>
@@ -21,4 +43,3 @@ export const UserAuthContextProvider = ({ children }) => {
     </UserAuthContext.Provider>
   );
 };
-

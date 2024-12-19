@@ -12,11 +12,19 @@ function CreateEvent() {
     eventDate: "",
     location: "",
     host: "", 
-    invited: "",
+    invited: [],
   });
+  const [userJwt] = useUserAuthContext();
 
   const navigate = useNavigate();
-  const { userJwt } = useUserAuthContext(); // Access the user context
+
+  useEffect(() => {
+    console.log("userJwt in CreateEvent:", userJwt);
+  }, [userJwt]);
+
+  if (!userJwt) {
+    return <div>Please log in to create an event.</div>;
+  }
 
   useEffect(() => {
     // Dynamically update the theme
@@ -35,7 +43,8 @@ function CreateEvent() {
   // Handle input field changes (title, description, etc.)
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setEventData({ ...eventData, [name]: value });
+    const updatedValue = name === "invited" ? value.split(",").map(item => item.trim()) : value;
+    setEventData({ ...eventData, [name]: updatedValue });
   };
 
   // Save the event
@@ -47,32 +56,46 @@ function CreateEvent() {
 
   // Handle publishing the event
   const handlePublish = async () => {
-    const userId = userJwt?.userId;
-    if (!userJwt) {
+    if (!userJwt || !userJwt.token) {
+      console.log("userJwt state: ", userJwt);
       alert("User is not authenticated.");
       return;
     }
 
-    try {
-      // Prepare event data with host (userId) and theme
-      const eventDataToSend = { ...eventData, theme, host: userJwt };
+    const hostId = userJwt.userId || null
+    console.log("userJwt userId:", userJwt?.userId);
+    const { eventName, description, eventDate, location, invited } = eventData;
+    const eventDataToSend = {
+      eventName,
+      description,
+      eventDate,
+      location,
+      host: hostId,
+      invited,
+    };
+    console.log("hostId from JWT:", hostId);
+    console.log("Event data to send:", eventDataToSend);
 
+    try {
       // Make a POST request to backend API
-      const response = await fetch("http://localhost:3000/event/create", {
+      const response = await fetch(`${import.meta.env.VITE_AUTH_API_URL}/event/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+           Authorization: `Bearer ${userJwt.token}`
         },
         body: JSON.stringify(eventDataToSend),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
-        const result = await response.json();
-        console.log("Event created successfully:", result);
+        // const result = await response.json();
+        console.log("Event created successfully:", data);
         alert("Event Published Successfully!");
         navigate("/saved-event"); // Redirect after success
       } else {
-        console.error("Failed to publish event");
+        console.error("Failed to publish event", data);
         alert("Failed to publish event. Please try again.");
       }
     } catch (error) {
@@ -134,12 +157,12 @@ function CreateEvent() {
             />
           </div>
           <div className="input-group">
-            <label>BRING:</label>
+            <label>INVITE FRIENDS:</label>
             <input
               type="text"
               placeholder="..."
-              name="bring"
-              value={eventData.bring || ""}
+              name="invited"
+              value={eventData.invited || []}
               onChange={handleInputChange}
             />
           </div>
