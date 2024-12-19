@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUserAuthContext } from "../contexts/UserAuthContextProvider";
 import "../css/global.css";
 import "../css/CreateEvent.css";
-import { useUserAuthContext } from "../contexts/UserAuthContextProvider";
 
 function CreateEvent() {
   const [theme, setTheme] = useState("default");

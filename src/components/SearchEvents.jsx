@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import { useUserAuthContext } from "../contexts/UserAuthContextProvider";
 import "../css/global.css"; 
 import '../css/SearchEvents.css';  
 
@@ -8,9 +9,42 @@ const SearchEvents = () => {
   const [filter, setFilter] = useState("");
   const [events, setEvents] = useState([]); // State to store fetched events
   const [error, setError] = useState(null); // State to handle errors
-  const [jwt, setJwt] = useState(localStorage.getItem("jwt") || "");
+  const [userJwt] = useUserAuthContext();
 
   const navigate = useNavigate();
+
+   // useEffect to populate event cards when component mounts
+
+   useEffect(() => {
+    const fetchAllEvents = async () => {
+      try {
+        setError(null);
+
+        const url = `${import.meta.env.VITE_AUTH_API_URL}/search/public/all`;
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          }
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || "Failed to fetch events.");
+        }
+
+        const data = await response.json();
+        setEvents(data.data);
+
+      } catch (err) {
+        console.error("Error fetching events:", err);
+        setError(err.message || "An unexpected error occurred.");
+      }
+    };
+
+    fetchAllEvents(); // Call fetch function when component is mounted
+  }, []);
+
   
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -41,7 +75,7 @@ const SearchEvents = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${jwt}`, 
+          Authorization: `Bearer ${userJwt.token}`, 
         },
       });
 
