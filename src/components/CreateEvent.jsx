@@ -44,7 +44,16 @@ function CreateEvent() {
   // Handle input field changes (title, description, etc.)
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    const updatedValue = name === "invited" ? value.split(",").map(item => item.trim()) : value;
+
+    let updatedValue = value;
+
+    if (name === "invited"){
+      updatedValue = name === "invited" ? value.split(",").map(item => item.trim()) : value;
+    }
+    if (updatedValue.length === 0) {
+      updatedValue = [];
+    }
+    
     setEventData({ ...eventData, [name]: updatedValue });
   };
 
