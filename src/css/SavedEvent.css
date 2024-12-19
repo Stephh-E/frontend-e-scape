@@ -12,9 +12,5 @@
     cursor: pointer;
   }
   
-  .attendance-buttons button.selected {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-  }
+  
   
