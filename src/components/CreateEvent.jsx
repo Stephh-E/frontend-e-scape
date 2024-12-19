@@ -26,6 +26,7 @@ function CreateEvent() {
     return <div>Please log in to create an event.</div>;
   }
 
+
   useEffect(() => {
     // Dynamically update the theme
     const link = document.getElementById("theme-stylesheet");
@@ -73,7 +74,7 @@ function CreateEvent() {
       host: hostId,
       invited,
     };
-    console.log("hostId from JWT:", hostId);
+
     console.log("Event data to send:", eventDataToSend);
 
     try {

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import "../css/global.css"; 
@@ -13,8 +12,6 @@ const SearchEvents = () => {
 
   const navigate = useNavigate();
   
-
-
     // useEffect to populate event cards when component mounts
 
     useEffect(() => {
