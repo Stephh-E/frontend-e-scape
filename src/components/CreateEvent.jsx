@@ -55,7 +55,7 @@ function CreateEvent() {
   const handleSave = () => {
     const savedEvent = { ...eventData, theme };
     localStorage.setItem("savedEvent", JSON.stringify(savedEvent)); // Save to localStorage
-    navigate("/saved-event"); // Redirect to saved event page
+    navigate("/saved-event"); 
   };
 
   // Handle publishing the event
@@ -76,6 +76,7 @@ function CreateEvent() {
       location,
       host: hostId,
       invited,
+      theme: theme
     };
 
     console.log("Event data to send:", eventDataToSend);
