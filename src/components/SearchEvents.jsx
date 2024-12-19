@@ -41,6 +41,7 @@ const SearchEvents = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${jwt}`, 
         },
       });
 
