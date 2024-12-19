@@ -31,15 +31,15 @@ function App() {
   const postUserSignUp = async () => {
     let userDetails = {
       username: "steph" + Math.floor(Math.random() * 1000),
-      password: "SomeCoolPassword"
+      password: "SomeCoolPassword",
     };
 
     let response = await fetch(`${import.meta.env.VITE_AUTH_API_URL}/signup`,
       {
         method: "POST",
         body: userDetails
-      }
-    );
+      });
+
     let data = await response.json();
     console.log(data);
     setUserJwt(data.jwt);
@@ -53,7 +53,7 @@ function App() {
     <div>
       <Navbar/>
       <main>
-        <h1 data-testid="jwt header">[userJwt]</h1>
+        <h1 data-testid="jwt-header">{userJwt ? userJwt : "No JWT available"}</h1>
         <button onClick={postUserSignUp}>
           Sign up a user
         </button>

@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     port: 3000
   },
-  tests: {
+  test: {
     globals: true, // user "describe", "expect", etc, without importing them in our test files
     environment: "jsdom", //makes our tests work as if they are in the browser
     setupFiles: "src/setupTest.js", //do any test config before tests run

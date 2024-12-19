@@ -1,26 +1,36 @@
 import { test, expect } from "vitest";
-import '@testing-library/jest-dom';
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event";
 import App from "./src/App";
 import { UserAuthContextProvider } from "./src/contexts/UserAuthContextProvider";
+import { MemoryRouter } from "react-router-dom";
 
 test("Renders the App component", () => {
-    render(<App />);
-    const mainPageHeader = screen .getByText("Create new Account");
+    render(
+    <MemoryRouter initialEntries={["/signup"]}>
+        <UserAuthContextProvider>
+            < App />
+        </UserAuthContextProvider>
+    </MemoryRouter>
+    );
+
+    const mainPageHeader = screen.getByText(/Create new Account/i);
     expect(mainPageHeader).toBeInTheDocument();
 
 });
 
 test("Render App component with JWT on display", async () => {
     render (
-        <UserAuthContextProvider>
-            < App />
-        </UserAuthContextProvider>
+        <MemoryRouter>
+            <UserAuthContextProvider>
+                < App />
+            </UserAuthContextProvider>
+        </MemoryRouter>
     );
 
     const jwtHeading = screen.getByTestId("jwt-header");
-    expect(jwtHeading).toHaveTextContent("");
+    expect(jwtHeading).toHaveTextContent("No JWT available");
+    expect(jwtHeading).not.toBeEmptyDOMElement();
 
     // Find the sign-up button
     const signUpButton = screen.getByText("Sign up a user");

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import "../css/global.css"; 
 import '../css/SearchEvents.css';  
 
@@ -8,6 +9,8 @@ const SearchEvents = () => {
   const [events, setEvents] = useState([]); // State to store fetched events
   const [error, setError] = useState(null); // State to handle errors
   const [jwt, setJwt] = useState(localStorage.getItem("jwt") || "");
+
+  const navigate = useNavigate();
   
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -61,6 +64,13 @@ const SearchEvents = () => {
       console.error("Error fetching events:", err);
       setError(err.message);
     }
+  };
+
+  const handleEventClick = (event) => {
+    // Save the selected event to local storage
+    localStorage.setItem("savedEvent", JSON.stringify(event));
+    // Navigate to the SavedEvent page
+    navigate("/saved-event");
   };
 
   return (
