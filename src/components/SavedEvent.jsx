@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../css/global.css"; 
 import "../css/SavedEvent.css";
-import MyCalendar from "./MyCalendar";
+
 
 function SavedEvent() {
   const [savedEvent, setSavedEvent] = useState(null);
@@ -9,6 +10,7 @@ function SavedEvent() {
   const [attendanceStatus, setAttendanceStatus] = useState(""); 
   // Store events for the calendar
   const [calendarEvents, setCalendarEvents] = useState([]); 
+  const navigate = useNavigate();  // Initialize useNavigate
 
   useEffect(() => {
     // Retrieve saved event data from local storage
@@ -20,14 +22,15 @@ function SavedEvent() {
 
   const handleAttendance = (status) => {
     setAttendanceStatus(status);
-    if (status === "going") {
-      // Add to calendar if the status is 'going'
+    if (status === "attending") {
+      // Add to calendar if the status is 'attending'
       setCalendarEvents((prevEvents) => [...prevEvents, savedEvent]);
+      navigate("/attending-page"); 
     }
   };
 
   if (!savedEvent) {
-    return <div>No event found. Please create an event first.</div>;
+    return <div>No event found.</div>;
   }
 
   // Apply the saved theme to the event invite
@@ -56,22 +59,12 @@ function SavedEvent() {
           Maybe
         </button>
         <button
-          className={attendanceStatus === "going" ? "selected" : ""}
-          onClick={() => handleAttendance("going")}
+          className={attendanceStatus === "can't-go" ? "selected" : ""}
+          onClick={() => handleAttendance("can't-go")}
         >
-          Going
+          Can't Go
         </button>
       </div>
-
-      {/* Display the selected status */}
-      {attendanceStatus && (
-        <p>
-          <strong>Status:</strong> You are <em>{attendanceStatus}</em>.
-        </p>
-      )}
-
-      {/* Render the calendar */}
-      <MyCalendar events={calendarEvents} />
     </div>
   );
 }

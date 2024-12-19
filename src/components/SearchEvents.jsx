@@ -121,9 +121,11 @@ const SearchEvents = () => {
         ) : events.length > 0 ? (
           // Events found - display the list
           events.map((event, index) => (
-            <div className="event-column" 
-                 key={index}>
-                 onCLick={() => handleEventClick(event)}
+            <div 
+              className="event-column" 
+              key={index}
+              onClick={() => handleEventClick(event)}
+            >
               <div className="event-card">
                 <h3>{event.eventName}</h3>
                 <div>{event.description}</div>

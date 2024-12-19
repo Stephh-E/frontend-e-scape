@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import SavedEvent from "./components/SavedEvent";
 import Calendar from "./components/MyCalendar";
 import NewEvent from "./components/NewEvent";
+import AttendingPage from "./components/AttendingPage";
 import { useUserAuthContext } from "./contexts/UserAuthContextProvider";
 
 
@@ -53,21 +54,16 @@ function App() {
     <div>
       <Navbar/>
       <main>
-        <h1 data-testid="jwt-header">{userJwt ? userJwt : "No JWT available"}</h1>
-        <button onClick={postUserSignUp}>
-          Sign up a user
-        </button>
         <link id="theme-stylesheet" rel="stylesheet" href="/themes/default.css" />
         <Routes>
-          <Route path="/events" element={<h1>New Event Page</h1>} />
           <Route path="/create" element={<CreateEvent />} />
-          <Route path="/myevents" element={<h1>My Events</h1>} />
           <Route path="/searchevents" element={<SearchEvents />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/saved-event" element={<SavedEvent />} />
-          <Route path="/new-event" element ={<NewEvent />} ></Route>
+          <Route path="/new-event" element={<NewEvent />} ></Route>
+          <Route path="/attending-page" element={<AttendingPage />}></Route>
       </Routes>
       </main>
     </div>
