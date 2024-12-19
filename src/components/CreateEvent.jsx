@@ -12,7 +12,6 @@ function CreateEvent() {
     eventDate: "",
     location: "",
     host: "", 
-    invited: [],
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -41,9 +40,6 @@ function CreateEvent() {
 
     let updatedValue = value;
 
-    if (name === "invited"){
-      updatedValue = name === "invited" ? value.split(",").map(item => item.trim()) : value;
-    }
     if (updatedValue.length === 0) {
       updatedValue = [];
     }
@@ -68,14 +64,13 @@ function CreateEvent() {
 
     const hostId = userJwt.userId || null
     console.log("userJwt userId:", userJwt?.userId);
-    const { eventName, description, eventDate, location, invited } = eventData;
+    const { eventName, description, eventDate, location } = eventData;
     const eventDataToSend = {
       eventName,
       description,
       eventDate,
       location,
       host: hostId,
-      invited,
       theme: theme
     };
 
@@ -148,7 +143,7 @@ function CreateEvent() {
             <label>WHEN:</label>
             <input
               type="text"
-              placeholder="YYYY-MM-DD"
+              placeholder="..."
               name="eventDate"
               value={eventData.eventDate}
               onChange={handleInputChange}
@@ -165,12 +160,12 @@ function CreateEvent() {
             />
           </div>
           <div className="input-group">
-            <label>INVITE FRIENDS:</label>
+            <label>BRING:</label>
             <input
               type="text"
               placeholder="..."
-              name="invited"
-              value={eventData.invited || []}
+              name="bring"
+              value={eventData.bring || []}
               onChange={handleInputChange}
             />
           </div>
