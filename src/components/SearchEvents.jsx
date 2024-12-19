@@ -1,17 +1,17 @@
-import { useState } from "react";
+import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import "../css/global.css";
-import "../css/SearchEvents.css";
+import "../css/global.css"; 
+import '../css/SearchEvents.css';  
 
 const SearchEvents = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filter, setFilter] = useState("");
   const [events, setEvents] = useState([]); // State to store fetched events
   const [error, setError] = useState(null); // State to handle errors
+  const [jwt, setJwt] = useState(localStorage.getItem("jwt") || "");
 
   const navigate = useNavigate();
-
-  // Handle search query changes
+  
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
@@ -28,11 +28,12 @@ const SearchEvents = () => {
       return;
     }
 
+    
     try {
       setError(null); // Reset error state before a new request
 
-      // Include filter in query string if applicable
-      const filterQuery = filter ? `&category=${encodeURIComponent(filter)}` : "";
+      // Inregrate the filter if applicable
+      const filterQuery = filter ? `&category=${encodeURIComponent(filter)}` : '';
       const url = `${import.meta.env.VITE_AUTH_API_URL}/search/public?query=${encodeURIComponent(searchQuery)}${filterQuery}`;
 
       // Make GET request to backend using fetch
@@ -63,6 +64,14 @@ const SearchEvents = () => {
     // Save the selected event to local storage
     localStorage.setItem("savedEvent", JSON.stringify(event));
     navigate("/saved-event");
+  };
+
+  const truncateDescription = (description) => {
+    const words = description.split(' ');
+    if (words.length > 15) {
+      return words.slice(0, 20).join(' ') + '...';
+    }
+    return description;
   };
 
   return (
@@ -118,13 +127,13 @@ const SearchEvents = () => {
             >
               <div className="event-card">
                 <h3>{event.eventName}</h3>
-                <div>{event.description}</div>
-                <p>
+                <p>{truncateDescription(event.description)}</p>
+                <span>
                   <strong>Where:</strong> {event.location}
-                </p>
-                <p>
+                </span>
+                <span>
                   <strong>When:</strong> {event.eventDate}
-                </p>
+                </span>
               </div>
             </div>
           ))

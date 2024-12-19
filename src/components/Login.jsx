@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/global.css";
 import "../css/Login.css";
+import { UserAuthContext } from "../contexts/UserAuthContextProvider";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [userJwt, setUserJwt] = useContext(UserAuthContext);
 
   const navigate = useNavigate();
 
@@ -33,7 +35,9 @@ const Login = () => {
 
       if (response.ok) {
         // On successful login, store the JWT and email
-        localStorage.setItem("jwt", data.data.jwt);
+        const { jwt } = data.data;
+        setUserJwt({ token: jwt, email })
+        localStorage.setItem("jwt", jwt);
         localStorage.setItem("email", email);
 
         // Redirect to the New Event page after login

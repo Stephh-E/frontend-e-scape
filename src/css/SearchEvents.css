@@ -108,6 +108,7 @@
   justify-content: center;
   align-items: center;
   height: 225px;
+  max-width: 300px;
   word-wrap: break-word;
   border: 1px solid grey;
 }
@@ -123,7 +124,8 @@
   white-space: nowrap;
 }
 
-.event-card p {
+.event-card span {
+  margin-bottom: 1em;
   font-size: 0.9em;
 }
 
