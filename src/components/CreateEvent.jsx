@@ -99,6 +99,9 @@ function CreateEvent() {
 
       if (response.ok) {
         console.log("Event created successfully:", data);
+
+        localStorage.setItem("savedEvent", JSON.stringify(data));
+        
         navigate("/saved-event");
       } else {
         console.error("Failed to publish event", data);
