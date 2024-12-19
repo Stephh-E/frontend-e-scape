@@ -14,17 +14,11 @@ function CreateEvent() {
     host: "", 
     invited: [],
   });
+  const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const [userJwt] = useUserAuthContext();
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    console.log("userJwt in CreateEvent:", userJwt);
-  }, [userJwt]);
-
-  if (!userJwt) {
-    return <div>Please log in to create an event.</div>;
-  }
 
 
   useEffect(() => {
@@ -53,7 +47,7 @@ function CreateEvent() {
     if (updatedValue.length === 0) {
       updatedValue = [];
     }
-    
+
     setEventData({ ...eventData, [name]: updatedValue });
   };
 
@@ -86,6 +80,9 @@ function CreateEvent() {
 
     console.log("Event data to send:", eventDataToSend);
 
+    setLoading(true);
+    setErrorMessage("");
+
     try {
       // Make a POST request to backend API
       const response = await fetch(`${import.meta.env.VITE_AUTH_API_URL}/event/create`, {
@@ -100,17 +97,17 @@ function CreateEvent() {
       const data = await response.json();
 
       if (response.ok) {
-        // const result = await response.json();
         console.log("Event created successfully:", data);
-        alert("Event Published Successfully!");
-        navigate("/saved-event"); // Redirect after success
+        navigate("/saved-event");
       } else {
         console.error("Failed to publish event", data);
-        alert("Failed to publish event. Please try again.");
+        setErrorMessage(data.message || "Failed to publish event. Please try again.");
       }
     } catch (error) {
       console.error("Error publishing event:", error);
-      alert("An error occurred while publishing the event.");
+      setErrorMessage("An error occurred while publishing the event.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -150,7 +147,7 @@ function CreateEvent() {
             <label>WHEN:</label>
             <input
               type="text"
-              placeholder="..."
+              placeholder="YYYY-MM-DD"
               name="eventDate"
               value={eventData.eventDate}
               onChange={handleInputChange}
@@ -180,8 +177,22 @@ function CreateEvent() {
       </div>
       <div className="buttons">
         <button type="button" className="button save-button" onClick={handleSave}>SAVE</button>
-        <button type="button" className="button publish-button" onClick={handlePublish}>PUBLISH</button>
+        
+        <button
+          type="button"
+          className="button publish-button"
+          onClick={handlePublish}
+        >
+          {loading ? "Publishing..." : "PUBLISH"}
+        </button>
       </div>
+
+      {/* Display error message if there is any */}
+      {errorMessage && (
+        <div className="error-message" style={{ color: "red", marginTop: "10px" }}>
+          {errorMessage}
+        </div>
+      )}
     </div>
   );
 }
