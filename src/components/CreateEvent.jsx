@@ -113,7 +113,7 @@ function CreateEvent() {
 
   return (
     <div className="create-event-container">
-      <div className="header">
+      <div className="event-title-wrapper">
         <input
           type="text"
           placeholder="Event Title ..."

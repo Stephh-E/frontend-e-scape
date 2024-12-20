@@ -10,11 +10,20 @@ const SearchEvents = () => {
   const [events, setEvents] = useState([]); // State to store fetched events
   const [error, setError] = useState(null); // State to handle errors
   const [userJwt] = useUserAuthContext();
-
   const navigate = useNavigate();
 
-   // useEffect to populate event cards when component mounts
+  // Function to format the event time
+  const formatEventTime = (dateString) => {
+    const date = new Date(dateString);
 
+    // Use toLocaleTimeString to format the time (e.g., '7:00 PM' or '10:00 AM')
+    const options = { hour: 'numeric', minute: 'numeric', hour12: true };
+    const time = date.toLocaleTimeString([], options);
+
+    return time;
+  };
+
+   // useEffect to populate event cards when component mounts
    useEffect(() => {
     const fetchAllEvents = async () => {
       try {
