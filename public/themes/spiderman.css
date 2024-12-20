@@ -2,7 +2,7 @@
 body{
     --text-color: black;
     background-color: #a71814;
-    background-image: url('assets/spiderweb.png');
+    background-image: url('../assets/spiderweb.png');
     background-size: cover;
     background-repeat: no-repeat; 
   

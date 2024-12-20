@@ -2,7 +2,7 @@
 body{
     --text-color: black;
     background-color: lightblue;
-    background-image: url('assets/blueBallons.png');
+    background-image: url('../assets/blueBallons.png');
     background-size: 30%;
     background-repeat: no-repeat; 
   

@@ -3,7 +3,7 @@
 body{
     --text-color: black;
     background-color: lightpink;
-    background-image: url('assets/pinkBalloon.png');
+    background-image: url('../assets/pinkBalloon.png');
     background-size: 50%;
     background-repeat: no-repeat; 
   
