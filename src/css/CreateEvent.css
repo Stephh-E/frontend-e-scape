@@ -22,17 +22,17 @@
 }
 
 .theme-selector {
+  flex: 1;
   padding: 10px;
   font-size: 16px; 
   border: 1px solid grey;
   border-radius: 4px;
   max-width: 190px; 
-  margin-left: 0;
 }
 
 .main-content {
   display: flex;
-  gap: 10px;
+  gap: 30px;
   justify-content: space-between;
   flex-wrap: wrap;
 }
@@ -59,7 +59,7 @@
 }
 
 .input-group label {
-  font-size: 16px; /* Larger labels */
+  font-size: 16px; 
   font-weight: bold;
   margin-bottom: 8px;
 }
@@ -76,7 +76,6 @@
   display: flex;
   justify-content: flex-end;
   gap: 5px;
-  margin-top: 10px;
 }
 
 .button {
