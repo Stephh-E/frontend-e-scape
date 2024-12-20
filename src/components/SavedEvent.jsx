@@ -14,17 +14,21 @@ function SavedEvent() {
   const [loading, setLoading] = useState(true); // Loading state
   const [errorMessage, setErrorMessage] = useState(null); 
   const [userJwt] = useUserAuthContext();
-  const navigate = useNavigate();  // Initialize useNavigate
+  const navigate = useNavigate();  // Initialise useNavigate
 
-    // Function to format the event time
-    const formatEventTime = (dateString) => {
+  // Function to format the event time
+  const formatEventTime = (dateString) => {
     const date = new Date(dateString);
-
-    // Use toLocaleTimeString to format the time (e.g., '7:00 PM' or '10:00 AM')
-    const options = { hour: 'numeric', minute: 'numeric', hour12: true };
+    const options = { hour: "numeric", minute: "numeric", hour12: true };
     const time = date.toLocaleTimeString([], options);
-
     return time;
+  };
+
+  // Function to format the event date
+  const formatEventDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return date.toLocaleDateString(undefined, options);
   };
 
   useEffect(() => {
@@ -47,7 +51,6 @@ function SavedEvent() {
       setErrorMessage("No event found.");
     }
   }, []);
-
 
   const handleAttendance = (status) => {
     setAttendanceStatus(status);
@@ -98,9 +101,10 @@ function SavedEvent() {
     <div className={`event-invite theme-${theme}`}>
       <h2>{eventName}</h2>
       <p>{description}</p>
-      <p><strong>WHEN:</strong> {eventDate}</p>
+      <p><strong>WHEN:</strong> {formatEventDate(eventDate)} at {formatEventTime(eventDate)}
+      </p>
       <p><strong>WHERE:</strong> {location}</p>
-      <p><strong>INVITEES:</strong></p>
+      <p><strong>INVITED:</strong></p>
       {invited && invited.length > 0 ? (
         <ul>
           {invited.map((id, index) => (
@@ -108,7 +112,7 @@ function SavedEvent() {
           ))}
         </ul>
       ) : (
-        <p>No one invited to this event yet!</p>
+        <p> No one invited to this event yet!</p>
       )}
 
       {/* Attendance buttons */}

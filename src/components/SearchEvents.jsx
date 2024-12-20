@@ -176,7 +176,7 @@ const SearchEvents = () => {
                   <strong>Where:</strong> {event.location}
                 </span>
                 <span>
-                  <strong>When:</strong> {event.eventDate}
+                  <strong>When:</strong> {new Date(event.eventDate).toLocaleDateString()} at {formatEventTime(event.eventDate)}
                 </span>
               </div>
             </div>
