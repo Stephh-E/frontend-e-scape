@@ -14,8 +14,18 @@ function SavedEvent() {
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); 
   const [userJwt] = useUserAuthContext();
-
   const navigate = useNavigate();  // Initialize useNavigate
+
+    // Function to format the event time
+    const formatEventTime = (dateString) => {
+    const date = new Date(dateString);
+
+    // Use toLocaleTimeString to format the time (e.g., '7:00 PM' or '10:00 AM')
+    const options = { hour: 'numeric', minute: 'numeric', hour12: true };
+    const time = date.toLocaleTimeString([], options);
+
+    return time;
+  };
 
   useEffect(() => {
     const event = localStorage.getItem("savedEvent");
