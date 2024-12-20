@@ -12,7 +12,7 @@ function SavedEvent() {
   // Store events for the calendar
   const [calendarEvents, setCalendarEvents] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
-  const [error, setError] = useState(null); 
+  const [errorMessage, setErrorMessage] = useState(null); 
   const [userJwt] = useUserAuthContext();
 
   const navigate = useNavigate();  // Initialize useNavigate
@@ -23,6 +23,7 @@ function SavedEvent() {
     if (event) {
       try {
         const eventData = JSON.parse(event);
+        console.log("Parsed eventData:", eventData);
         if (eventData.data){
           setSavedEvent(eventData.data);
         } else {
@@ -30,17 +31,25 @@ function SavedEvent() {
         }
       } catch (error) {
         console.error("Error parsing event data from localStorage:", error);
-        setError("Failed to load event data.");
+        setErrorMessage("Failed to load event data.");
       }
     } else {
-      setError("No event found.");
+      setErrorMessage("No event found.");
     }
   }, []);
+
 
   const handleAttendance = (status) => {
     setAttendanceStatus(status);
 
-    fetch(`${import.meta.env.VITE_AUTH_API_URL}/attending/${savedEvent.id}`, {
+    const eventId = savedEvent._id;
+
+    if (!savedEvent || !userJwt?.token){
+      setErrorMessage("Event or user authentication is missing.");
+      return;
+    }
+
+    fetch(`${import.meta.env.VITE_AUTH_API_URL}/rsvp/attending/${eventId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,15 +60,20 @@ function SavedEvent() {
       .then((response) => response.json())
       .then((data) => {
         console.log("RSVP response:", data);
+
+        if (data.success === false) {
+          setErrorMessage(data.message);
+          return;
+        }
   
         if (status === "yes") {
-          // Add to calendar if the status is 'yes'
           setCalendarEvents((prevEvents) => [...prevEvents, savedEvent]);
           navigate("/attending-page");
         }
       })
       .catch((error) => {
         console.error("Error updating attendance status:", error);
+        setErrorMessage(error.message)
       });
   };
 
@@ -107,6 +121,14 @@ function SavedEvent() {
         >
           Can't Go
         </button>
+        <div>
+            {/* Display error message */}
+          {errorMessage && (
+            <div className="error-message" style={{ color: "red", marginTop: "10px" }}>
+            {errorMessage}
+            </div>
+            )}
+        </div>
       </div>
     </div>
   );
