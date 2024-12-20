@@ -49,8 +49,9 @@ function CreateEvent() {
 
   // Save the event
   const handleSave = () => {
-    const savedEvent = { ...eventData, theme };
-    localStorage.setItem("savedEvent", JSON.stringify(savedEvent)); // Save to localStorage
+    const savedEvent = { ...eventData, theme, invited: [] };
+    localStorage.setItem("savedEvent", JSON.stringify(savedEvent));
+    console.log("Saved event to localStorage:", savedEvent);
     navigate("/saved-event"); 
   };
 

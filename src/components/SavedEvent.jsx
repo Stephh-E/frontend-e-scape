@@ -18,12 +18,22 @@ function SavedEvent() {
   const navigate = useNavigate();  // Initialize useNavigate
 
   useEffect(() => {
-    // Retrieve saved event data from local storage
     const event = localStorage.getItem("savedEvent");
-    console.log("Saved event from localStorage:", event);
+    console.log("Loaded saved event from localStorage:", event);
     if (event) {
-      const eventData = JSON.parse(event);
-      setSavedEvent(eventData.data);
+      try {
+        const eventData = JSON.parse(event);
+        if (eventData.data){
+          setSavedEvent(eventData.data);
+        } else {
+          setSavedEvent(eventData);
+        }
+      } catch (error) {
+        console.error("Error parsing event data from localStorage:", error);
+        setError("Failed to load event data.");
+      }
+    } else {
+      setError("No event found.");
     }
   }, []);
 
@@ -54,6 +64,7 @@ function SavedEvent() {
   };
 
   if (!savedEvent) {
+    console.log("No event to display, savedEvent is null or undefined.");
     return <div>No event found.</div>;
   }
 
@@ -65,7 +76,16 @@ function SavedEvent() {
       <p>{description}</p>
       <p><strong>WHEN:</strong> {eventDate}</p>
       <p><strong>WHERE:</strong> {location}</p>
-      <p><strong>INVITEES:</strong> {invited}</p>
+      <p><strong>INVITEES:</strong></p>
+      {invited && invited.length > 0 ? (
+        <ul>
+          {invited.map((id, index) => (
+            <li key={index}>{id}</li>
+          ))}
+        </ul>
+      ) : (
+        <p>No one invited to this event yet!</p>
+      )}
 
       {/* Attendance buttons */}
       <div className="attendance-buttons">
