@@ -6,9 +6,9 @@
 
 .header {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
-  gap: 10px;
+  gap: 0;
   margin-bottom: 20px;
 }
 
