@@ -11,7 +11,7 @@ function SavedEvent() {
   const [attendanceStatus, setAttendanceStatus] = useState(""); 
   // Store events for the calendar
   const [calendarEvents, setCalendarEvents] = useState([]);
-  const [loading, setLoading] = useState(true); // Loading state
+  // const [loading, setLoading] = useState(true); // Loading state
   const [errorMessage, setErrorMessage] = useState(null); 
   const [userJwt] = useUserAuthContext();
   const navigate = useNavigate();  // Initialise useNavigate
@@ -23,6 +23,11 @@ function SavedEvent() {
     const time = date.toLocaleTimeString([], options);
     return time;
   };
+
+  useEffect(() => {
+    // Log the JWT to see if it's being loaded from localStorage
+    console.log("User JWT in SavedEvent:", userJwt);
+  }, [userJwt]);
 
   // Function to format the event date
   const formatEventDate = (dateString) => {
@@ -38,7 +43,8 @@ function SavedEvent() {
       try {
         const eventData = JSON.parse(event);
         console.log("Parsed eventData:", eventData);
-        if (eventData.data){
+
+        if (eventData.data) {
           setSavedEvent(eventData.data);
         } else {
           setSavedEvent(eventData);
@@ -53,28 +59,34 @@ function SavedEvent() {
   }, []);
 
   const handleAttendance = (status) => {
-    setAttendanceStatus(status);
-
-    const eventId = savedEvent._id;
-
-    if (!savedEvent || !userJwt?.token){
-      setErrorMessage("Event or user authentication is missing.");
+    if (!userJwt?.token) {
+      setErrorMessage("You need to be logged in to RSVP.");
       return;
     }
-
-    fetch(`${import.meta.env.VITE_AUTH_API_URL}/rsvp/attending/${eventId}`, {
+  
+    setAttendanceStatus(status);
+  
+    const eventId = savedEvent._id;
+    const apiUrl = `${import.meta.env.VITE_AUTH_API_URL}/attending/${eventId}`;
+  
+    fetch(apiUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${userJwt.token}`
+        Authorization: `Bearer ${userJwt.token}`,
       },
       body: JSON.stringify({ status }),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to update attendance: ${response.statusText}`);
+        }
+        return response.json();
+      })
       .then((data) => {
         console.log("RSVP response:", data);
-
-        if (data.success === false) {
+  
+        if (!data.success) {
           setErrorMessage(data.message);
           return;
         }
@@ -85,16 +97,14 @@ function SavedEvent() {
         }
       })
       .catch((error) => {
-        console.error("Error updating attendance status:", error);
-        setErrorMessage(error.message)
+        setErrorMessage(error.message || "Something went wrong. Please try again.");
       });
   };
 
-  if (!savedEvent) {
-    console.log("No event to display, savedEvent is null or undefined.");
-    return <div>No event found.</div>;
-  }
-
+if (!savedEvent) {
+      console.log("No event to display");
+      return <div> No event found. </div>
+}
   const { eventName, description, eventDate, location, invited, theme } = savedEvent;
 
   return (
