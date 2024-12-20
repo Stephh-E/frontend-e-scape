@@ -9,24 +9,25 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 15px;
+  gap: 10px; /* Reduced gap for closer spacing */
   margin-bottom: 20px;
 }
 
 .event-title {
   flex: 1;
   padding: 15px;
-  font-size: 18px; /* Larger text */
+  font-size: 20px; /* Increased size for better visibility */
   border: 1px solid grey;
   border-radius: 4px;
-  max-width: 400px; /* About half the description field's width */
+  max-width: 600px; /* Slightly wider for better balance */
 }
 
 .theme-selector {
   padding: 12px;
-  font-size: 16px; /* Larger text */
+  font-size: 16px; /* Consistent font size */
   border: 1px solid grey;
   border-radius: 4px;
+  max-width: 200px; /* Shortened dropdown width */
 }
 
 .main-content {
@@ -65,5 +66,61 @@
 
 .input-group input {
   padding: 10px;
-  font-size: 16px; /* Larger
+  font-size: 16px; /* Larger text */
+  border: 1px solid grey;
+  border-radius: 4px;
+  max-width: 200px; /* Quarter size of previous inputs */
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.button {
+  padding: 12px 20px;
+  font-size: 16px; /* Larger buttons */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.save-button {
+  background-color: #f0f0f0;
+  color: black;
+}
+
+.publish-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.publish-button:hover {
+  background-color: #0056b3;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .theme-selector {
+    max-width: 100%;
+  }
+
+  .main-content {
+    flex-direction: column;
+  }
+
+  .event-description,
+  .details {
+    flex: 1;
+    width: 100%;
+  }
+}
 
