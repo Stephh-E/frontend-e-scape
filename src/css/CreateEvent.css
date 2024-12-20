@@ -1,5 +1,5 @@
 .create-event-container {
-  max-width: 900px; /* Slightly wider for larger elements */
+  max-width: 900px; 
   margin: 0 auto;
   padding: 30px;
   font-family: Arial, sans-serif;
@@ -9,25 +9,25 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 10px; /* Reduced gap for closer spacing */
+  gap: 5px; 
   margin-bottom: 20px;
 }
 
 .event-title {
   flex: 1;
   padding: 15px;
-  font-size: 20px; /* Increased size for better visibility */
+  font-size: 20px; 
   border: 1px solid grey;
   border-radius: 4px;
-  max-width: 600px; /* Slightly wider for better balance */
+  max-width: 400px; 
 }
 
 .theme-selector {
   padding: 12px;
-  font-size: 16px; /* Consistent font size */
+  font-size: 16px; 
   border: 1px solid grey;
   border-radius: 4px;
-  max-width: 200px; /* Shortened dropdown width */
+  max-width: 190px; 
 }
 
 .main-content {
@@ -39,7 +39,7 @@
 
 .event-description {
   flex: 1;
-  min-height: 220px; /* Slightly taller */
+  min-height: 220px; 
   border: 1px solid grey;
   border-radius: 4px;
   padding: 20px;
@@ -47,7 +47,7 @@
 }
 
 .details {
-  flex: 0.5; /* Reduced width for the details column */
+  flex: 0.5; 
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -88,12 +88,12 @@
 }
 
 .save-button {
-  background-color: #f0f0f0;
+  background-color: #black;
   color: black;
 }
 
 .publish-button {
-  background-color: #007bff;
+  background-color: black;
   color: white;
 }
 
