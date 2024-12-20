@@ -14,7 +14,7 @@
 
 .event-title {
   flex: 1;
-  padding: 15px;
+  padding: 5px;
   font-size: 18px; 
   border: 1px solid grey;
   border-radius: 4px;
@@ -22,7 +22,7 @@
 }
 
 .theme-selector {
-  padding: 12px;
+  padding: 5px;
   font-size: 16px; 
   border: 1px solid grey;
   border-radius: 4px;
