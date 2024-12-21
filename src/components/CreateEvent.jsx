@@ -173,12 +173,12 @@ function CreateEvent() {
             </div>
   
             <div className="input-group">
-              <label>BRING:</label>
+              <label>INVITED:</label>
               <input
                 type="text"
-                placeholder="What to Bring"
-                name="bring"
-                value={eventData.bring}
+                placeholder=""
+                name="invited"
+                value={eventData.invited}
                 onChange={handleInputChange}
               />
             </div>
