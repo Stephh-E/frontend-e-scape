@@ -93,7 +93,7 @@
 .events-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3 columns for events */
-  gap: 20px;
+  gap: 10px;
 }
 
 .event-column {
@@ -109,7 +109,6 @@
   align-items: center;
   height: 225px;
   max-width: 400px;
-  word-wrap: break-word;
   border: 1px solid grey;
 }
 
@@ -129,6 +128,15 @@
   font-size: 0.9em;
 }
 
+.load-more-button-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.load-more-button {
+  display: block;
+  margin: 20px auto;
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
