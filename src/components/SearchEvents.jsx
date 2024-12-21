@@ -8,15 +8,16 @@ const SearchEvents = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filter, setFilter] = useState("");
   const [events, setEvents] = useState([]); // State to store fetched events
+  const [visibleEvents, setVisibleEvents] = useState(6);
   const [error, setError] = useState(null); // State to handle errors
   const [userJwt] = useUserAuthContext();
   const navigate = useNavigate();
 
-  // Function to format the event time
+  // Format the event time
   const formatEventTime = (dateString) => {
     const date = new Date(dateString);
 
-    // Use toLocaleTimeString to format the time (e.g., '7:00 PM' or '10:00 AM')
+    // Format the time (e.g., '7:00 PM' or '10:00 AM')
     const options = { hour: 'numeric', minute: 'numeric', hour12: true };
     const time = date.toLocaleTimeString([], options);
 
@@ -33,8 +34,7 @@ const SearchEvents = () => {
         const response = await fetch(url, {
           method: "GET",
           headers: {
-            "Content-Type": "application/json",
-          }
+            "Content-Type": "application/json" },
         });
 
         if (!response.ok) {
@@ -44,17 +44,16 @@ const SearchEvents = () => {
 
         const data = await response.json();
         setEvents(data.data);
-
       } catch (err) {
         console.error("Error fetching events:", err);
         setError(err.message || "An unexpected error occurred.");
       }
     };
 
-    fetchAllEvents(); // Call fetch function when component is mounted
+    fetchAllEvents(); 
   }, []);
 
-  
+  // Handle search changes
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
@@ -67,11 +66,10 @@ const SearchEvents = () => {
   // Fetch and display search results
   const handleSearch = async () => {
     if (!searchQuery) {
-      setError("Please enter a search query."); // Error for empty search query
+      setError("Please enter a search query.");
       return;
     }
 
-    
     try {
       setError(null); // Reset error state before a new request
 
@@ -97,6 +95,7 @@ const SearchEvents = () => {
       // Parse and update events state
       const data = await response.json();
       setEvents(data.data);
+      setVisibleEvents(6);
     } catch (err) {
       console.error("Error fetching events:", err);
       setError(err.message);
@@ -110,10 +109,14 @@ const SearchEvents = () => {
     navigate("/saved-event");
   };
 
+  const loadMoreEvents = () => {
+    setVisibleEvents((prevVisibleEvents) => prevVisibleEvents + 6);
+  };
+
   const truncateDescription = (description) => {
     const words = description.split(' ');
-    if (words.length > 15) {
-      return words.slice(0, 20).join(' ') + '...';
+    if (words.length > 10) {
+      return words.slice(0, 10).join(' ') + '...';
     }
     return description;
   };
@@ -163,7 +166,7 @@ const SearchEvents = () => {
         {error ? (
           <div className="error-message">{error}</div>
         ) : events.length > 0 ? (
-          events.map((event, index) => (
+          events.slice(0, visibleEvents).map((event, index) => (
             <div 
               className="event-column" 
               key={index}
@@ -185,6 +188,11 @@ const SearchEvents = () => {
           <p className="no-results-message">No events found. Try a different search.</p>
         )}
       </div>
+      {visibleEvents < events.length && (
+        <button className="button load-more-button" onClick={loadMoreEvents}>
+          LOAD MORE
+        </button>
+      )}
     </div>
   );
 };
