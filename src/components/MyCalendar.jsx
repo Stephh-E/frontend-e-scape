@@ -28,7 +28,6 @@ function CalendarPage() {
       setLoading(false); 
       return; 
     }
-
     try {
       const response = await fetch(`${import.meta.env.VITE_AUTH_API_URL}/event/attending`, 
         {
