@@ -22,6 +22,13 @@ function CalendarPage() {
   }, []);
 
   const fetchEvents = async () => {
+    // Check if userJwt exists and contains a token before proceeding
+    if (!userJwt || !userJwt.token) {
+      console.error('User is not authenticated');
+      setLoading(false); 
+      return; 
+    }
+    
     try {
       const response = await fetch(`${import.meta.env.VITE_AUTH_API_URL}/event/attending`, 
         {
@@ -74,7 +81,7 @@ function CalendarPage() {
       setSelectedEvent(null);
       setIsModalVisible(false); 
     };
-    
+
     console.log("Google URL:", googleUrl);
 
   return (

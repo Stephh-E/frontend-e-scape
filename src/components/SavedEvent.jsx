@@ -23,9 +23,8 @@ function SavedEvent() {
     const time = date.toLocaleTimeString([], options);
     return time;
   };
-
+  // Log the JWT to see if it's being loaded from localStorage
   useEffect(() => {
-    // Log the JWT to see if it's being loaded from localStorage
     console.log("User JWT in SavedEvent:", userJwt);
   }, [userJwt]);
 
@@ -42,12 +41,7 @@ function SavedEvent() {
     if (event) {
       try {
         const eventData = JSON.parse(event);
-
-        if (eventData.data) {
-          setSavedEvent(eventData.data);
-        } else {
-          setSavedEvent(eventData);
-        }
+        setSavedEvent(eventData.data || eventData);
       } catch (error) {
         console.error("Error parsing event data from localStorage:", error);
         setErrorMessage("Failed to load event data.");
@@ -57,7 +51,7 @@ function SavedEvent() {
     }
   }, []);
 
-  const handleAttendance = (status) => {
+  const handleAttendance =  async (status) => {
     console.log("Status sent to the API: ", status)
     if (!userJwt?.token) {
       setErrorMessage("You need to be logged in to RSVP.");
@@ -69,38 +63,39 @@ function SavedEvent() {
     const eventId = savedEvent._id;
     const apiUrl = `${import.meta.env.VITE_AUTH_API_URL}/rsvp/attending/${eventId}`;
   
-    fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${userJwt.token}`,
-      },
-      body: JSON.stringify({ status }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          return response.json().then((errorData) => {
-            throw new Error(errorData.message || 'Something went wrong.');
-          });
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("RSVP response:", data);
-  
-        if (!data.success) {
-          setErrorMessage(data.message);
-          return;
-        }
-  
-        if (status === "yes") {
-          setCalendarEvents((prevEvents) => [...prevEvents, savedEvent]);
-          navigate("/attending-page");
-        }
-      })
-      .catch((error) => {
-        setErrorMessage(error.message || "Something went wrong. Please try again.");
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userJwt.token}`,
+        },
+        body: JSON.stringify({ status }),
       });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Something went wrong.');
+      }
+
+      const data = await response.json();
+      console.log("RSVP response:", data);
+
+      if (!data.success) {
+        setErrorMessage(data.message);
+        return;
+      }
+
+      if (status === "yes") {
+        setCalendarEvents((prevEvents) => [...prevEvents, savedEvent]);
+        setTimeout(() => {
+          navigate("/attending-page");
+        }, 500); // 500ms delay before navigation
+      }
+    } catch (error) {
+      setErrorMessage(error.message || "Something went wrong. Please try again.");
+    }
   };
 
 if (!savedEvent) {
