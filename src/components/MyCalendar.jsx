@@ -40,7 +40,6 @@ function CalendarPage() {
       );
 
       const data = await response.json();
-
       if (response.ok && data.data){
         const formattedEvents = data.data.map((event) => ({
           id: event._id,
