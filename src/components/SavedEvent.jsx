@@ -45,6 +45,7 @@ function SavedEvent() {
       try {
         const eventData = JSON.parse(event);
         setSavedEvent(eventData.data || eventData);
+        console.log("Parsed Event Data:", eventData);
       } catch (error) {
         console.error("Error parsing event data from localStorage:", error);
         setErrorMessage("Failed to load event data.");
@@ -54,6 +55,9 @@ function SavedEvent() {
   
 
   const handleAttendance =  async (status) => {
+    console.log("Status sent to the API: ", status);
+    console.log("User JWT in handleAttendance:", userJwt);
+    console.log("Saved Event ID:", savedEvent._id);
     console.log("Status sent to the API: ", status)
     if (!userJwt?.token) {
       setErrorMessage("You need to be logged in to RSVP.");
