@@ -15,6 +15,7 @@ function CalendarPage() {
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [userJwt] = useUserAuthContext();
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     fetchEvents();
@@ -49,7 +50,7 @@ function CalendarPage() {
       }
     } catch (error) {
       console.error("Error fetching events: ", error);
-      setErrorMessage("An error occurred while loading events, please try again later.");
+      setErrorMessage("An error occurred while loading events.");
     } finally {
       setLoading(false);
     }
@@ -66,14 +67,14 @@ function CalendarPage() {
 
     const handleEventSelect = (event) => {
       setSelectedEvent(event);
-      document.querySelector(".event-details-modal").classList.add("show");
+      setIsModalVisible(true); 
     };
 
     const closeModal = () => {
       setSelectedEvent(null);
-      document.querySelector(".event-details-modal").classList.remove("show");
+      setIsModalVisible(false); 
     };
-
+    
     console.log("Google URL:", googleUrl);
 
   return (
