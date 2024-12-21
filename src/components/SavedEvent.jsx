@@ -38,7 +38,10 @@ function SavedEvent() {
   useEffect(() => {
     const event = localStorage.getItem("savedEvent");
     console.log("Loaded saved event from localStorage:", event);
-    if (event) {
+  
+    if (!event) {
+      setErrorMessage("No event found.");
+    } else {
       try {
         const eventData = JSON.parse(event);
         setSavedEvent(eventData.data || eventData);
@@ -46,10 +49,9 @@ function SavedEvent() {
         console.error("Error parsing event data from localStorage:", error);
         setErrorMessage("Failed to load event data.");
       }
-    } else {
-      setErrorMessage("No event found.");
     }
   }, []);
+  
 
   const handleAttendance =  async (status) => {
     console.log("Status sent to the API: ", status)

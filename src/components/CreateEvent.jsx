@@ -15,7 +15,9 @@ function CreateEvent() {
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
+
   const [userJwt] = useUserAuthContext();
+  console.log("userJwt:", userJwt);
 
   const navigate = useNavigate();
 
@@ -151,7 +153,7 @@ function CreateEvent() {
             <div className="input-group">
               <label>WHEN:</label>
               <input
-                type="text"
+                type="date"
                 placeholder="Event Date"
                 name="eventDate"
                 value={eventData.eventDate}

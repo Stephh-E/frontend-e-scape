@@ -104,9 +104,13 @@ const SearchEvents = () => {
 
   // Navigate to the saved event page
   const handleEventClick = (event) => {
-    // Save the selected event to local storage
-    localStorage.setItem("savedEvent", JSON.stringify(event));
-    navigate("/saved-event");
+    if (!event) {
+      console.error("No event data provided.");
+    } else {
+      // Save the selected event to local storage
+      localStorage.setItem("savedEvent", JSON.stringify(event));
+      navigate("/saved-event");
+    }
   };
 
   const loadMoreEvents = () => {
