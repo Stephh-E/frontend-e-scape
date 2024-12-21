@@ -28,7 +28,7 @@ function CalendarPage() {
       setLoading(false); 
       return; 
     }
-    
+
     try {
       const response = await fetch(`${import.meta.env.VITE_AUTH_API_URL}/event/attending`, 
         {
@@ -85,7 +85,7 @@ function CalendarPage() {
     console.log("Google URL:", googleUrl);
 
   return (
-    <div className="create-event-container">
+    <div className="container">
       <div className="left-column">
         <h2>MY EVENTS</h2>
         {events.length === 0 ? (

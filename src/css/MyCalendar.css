@@ -1,5 +1,7 @@
+
 .container {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     gap: 20px; 
     margin: 0 auto;
@@ -12,6 +14,7 @@
   .left-column,
   .right-column {
     flex: 1; 
+    min-width: 300px;
   }
   
   .event-card {
@@ -21,10 +24,8 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    position: relative; 
-    box-sizing: border-box;
     display: flex;
+    position: relative; 
     flex-direction: column;
   }
   
@@ -45,25 +46,28 @@
 
   /* Right Column: Calendar Styling */
   .right-column {
-    padding-left: 1px;
+    padding-left: 20px;
   }
   
   .calendar-container {
     padding: 10px;
     border-radius: 8px;
     width: 100%;
-    height: 60vh;
   }
 
 @media (max-width: 768px) {
     .container {
       flex-direction: column; 
       gap: 15px; 
+      align-items: center;
     }
   
     .left-column,
     .right-column {
       width: 100%; 
     }
+
+  .calendar-container {
+    height: auto; /* Adjust calendar height for smaller screens */
   }
-  
+}
