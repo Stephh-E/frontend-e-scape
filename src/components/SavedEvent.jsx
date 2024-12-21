@@ -67,7 +67,7 @@ function SavedEvent() {
     setAttendanceStatus(status);
   
     const eventId = savedEvent._id;
-    const apiUrl = `${import.meta.env.VITE_AUTH_API_URL}/attending/${eventId}`;
+    const apiUrl = `${import.meta.env.VITE_AUTH_API_URL}/rsvp/attending/${eventId}`;
   
     fetch(apiUrl, {
       method: "POST",

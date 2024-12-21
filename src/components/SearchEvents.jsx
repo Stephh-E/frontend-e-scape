@@ -155,9 +155,6 @@ const SearchEvents = () => {
               </select>
             </div>
           </div>
-          <button className="button search-button" onClick={handleSearch}>
-            SEARCH
-          </button>
         </div>
       </div>
 
@@ -188,10 +185,13 @@ const SearchEvents = () => {
           <p className="no-results-message">No events found. Try a different search.</p>
         )}
       </div>
+
       {visibleEvents < events.length && (
-        <button className="button load-more-button" onClick={loadMoreEvents}>
-          LOAD MORE
-        </button>
+        <div className="load-more-button-container">
+          <button className="button load-more-button" onClick={loadMoreEvents}>
+            LOAD MORE
+          </button>
+        </div>
       )}
     </div>
   );
