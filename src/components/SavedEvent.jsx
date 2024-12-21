@@ -59,9 +59,18 @@ function SavedEvent() {
   
 
   const handleAttendance = (status) => {
+    console.log("Status sent to the API: ", status)
+    if (!userJwt?.token) {
+      setErrorMessage("You need to be logged in to RSVP.");
+      return;
+    }
+    
     setAttendanceStatus(status);
 
-    fetch(`${import.meta.env.VITE_AUTH_API_URL}/attending/${savedEvent.id}`, {
+    const eventId = savedEvent._id;
+    const apiUrl = `${import.meta.env.VITE_AUTH_API_URL}/rsvp/attending/${eventId}`;
+
+    fetch(apiUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -88,7 +97,7 @@ function SavedEvent() {
     console.log("No event to display, savedEvent is null or undefined.");
     return <div>No event found.</div>;
   }
-  
+
   const { eventName, description, eventDate, location, invited, theme } = savedEvent;
 
   return (
