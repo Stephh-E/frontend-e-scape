@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../css/global.css"; 
 import "../css/SavedEvent.css";
 import { useUserAuthContext } from "../contexts/UserAuthContextProvider";
+import { google } from "calendar-link"; 
 
 
 function SavedEvent() {
@@ -106,6 +107,14 @@ if (!savedEvent) {
 }
   const { eventName, description, eventDate, location, invited, theme } = savedEvent;
 
+  // Google Calendar URL generation
+  const googleUrl = google({
+    title: eventName,
+    description: description,
+    start: new Date(eventDate),
+    location: location,
+  });
+
   return (
     <div className={`event-invite theme-${theme}`}>
       <h2>{eventName}</h2>
@@ -152,6 +161,18 @@ if (!savedEvent) {
             </div>
             )}
         </div>
+      {/* Google Calendar Button */}
+      <div>
+        {googleUrl && (
+          <a
+            href={googleUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="button no-underline">
+            Add to Google Calendar
+          </a>
+        )}
+      </div>
       </div>
     </div>
   );
