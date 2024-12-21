@@ -11,13 +11,12 @@ function CreateEvent() {
     description: "",
     eventDate: "",
     location: "",
-    host: "", 
+    host: "",
+    invited: []
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
-
   const [userJwt] = useUserAuthContext();
-  console.log("userJwt:", userJwt);
 
   const navigate = useNavigate();
 
@@ -46,6 +45,13 @@ function CreateEvent() {
       updatedValue = "";
     }
 
+    if (name === "invited"){
+      updatedValue = name === "invited" ? value.split(",").map(item => item.trim()) : value;
+    }
+    if (updatedValue.length === 0) {
+      updatedValue = [];
+    }
+
     setEventData({ ...eventData, [name]: updatedValue });
   };
 
@@ -67,13 +73,14 @@ function CreateEvent() {
 
     const hostId = userJwt.userId || null
     console.log("userJwt userId:", userJwt?.userId);
-    const { eventName, description, eventDate, location } = eventData;
+    const { eventName, description, eventDate, location, invited } = eventData;
     const eventDataToSend = {
       eventName,
       description,
       eventDate,
       location,
       host: hostId,
+      invited,
       theme: theme
     };
 
@@ -173,12 +180,12 @@ function CreateEvent() {
             </div>
   
             <div className="input-group">
-              <label>INVITED:</label>
+              <label>INVITE FRIENDS:</label>
               <input
                 type="text"
                 placeholder=""
                 name="invited"
-                value={eventData.invited}
+                value={eventData.invited || []}
                 onChange={handleInputChange}
               />
             </div>
