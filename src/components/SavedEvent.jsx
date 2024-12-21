@@ -42,7 +42,6 @@ function SavedEvent() {
     if (event) {
       try {
         const eventData = JSON.parse(event);
-        console.log("Parsed eventData:", eventData);
 
         if (eventData.data) {
           setSavedEvent(eventData.data);
@@ -59,6 +58,7 @@ function SavedEvent() {
   }, []);
 
   const handleAttendance = (status) => {
+    console.log("Status sent to the API: ", status)
     if (!userJwt?.token) {
       setErrorMessage("You need to be logged in to RSVP.");
       return;
@@ -79,7 +79,9 @@ function SavedEvent() {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`Failed to update attendance: ${response.statusText}`);
+          return response.json().then((errorData) => {
+            throw new Error(errorData.message || 'Something went wrong.');
+          });
         }
         return response.json();
       })
