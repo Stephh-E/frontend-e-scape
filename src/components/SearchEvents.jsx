@@ -159,6 +159,9 @@ const SearchEvents = () => {
               </select>
             </div>
           </div>
+          <button className="button search-button" onClick={handleSearch}>
+            SEARCH
+          </button>
         </div>
       </div>
 
