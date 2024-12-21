@@ -14,6 +14,7 @@
   z-index: 1000;
   top: 0;
   left: 0;
+  
 }
 
 main {
@@ -30,6 +31,7 @@ main {
   display: flex;
   align-items: center;
   gap: 1rem; 
+  margin-left: auto;
 }
 
 /* Hamburger Menu */
@@ -83,15 +85,17 @@ main {
   color: #007bff;
 }
 
+.profile-container {
+  position: relative;
+}
+
 .profile-dropdown {
   position: absolute;
-  top: 500px; 
-  right: 100px;
+  top: 30px; 
   background-color: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   list-style: none;
-  padding: 8px 0;
+  padding: 8px;
   z-index: 1000;
 }
 
