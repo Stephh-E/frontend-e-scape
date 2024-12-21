@@ -77,7 +77,7 @@ function CalendarPage() {
     console.log("Google URL:", googleUrl);
 
   return (
-    <div className="container">
+    <div className="create-event-container">
       <div className="left-column">
         <h2>MY EVENTS</h2>
         {events.length === 0 ? (

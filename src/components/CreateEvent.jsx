@@ -41,7 +41,7 @@ function CreateEvent() {
     let updatedValue = value;
 
     if (updatedValue.length === 0) {
-      updatedValue = [];
+      updatedValue = "";
     }
 
     setEventData({ ...eventData, [name]: updatedValue });
@@ -113,88 +113,99 @@ function CreateEvent() {
 
   return (
     <div className="create-event-container">
-      <div className="event-title-wrapper">
-        <input
-          type="text"
-          placeholder="Event Title ..."
-          className="event-title"
-          name="eventName"
-          value={eventData.eventName}
-          onChange={handleInputChange}
-        />
-        <select
-          className="theme-selector"
-          value={theme}
-          onChange={handleThemeChange}
-        >
-          <option value="default">Default Theme</option>
-          <option value="halloween">Halloween</option>
-          <option value="spiderman">Spiderman</option>
-          <option value="pink">Pink</option>
-          <option value="blue">Blue</option>
-        </select>
-      </div>
-      <div className="main-content">
-        <textarea
-          className="event-description"
-          placeholder="Describe your event here..."
-          name="description"
-          value={eventData.description}
-          onChange={handleInputChange}
-        ></textarea>
-        <div className="details">
-          <div className="input-group">
-            <label>WHEN:</label>
+      <form>
+        <div className="row">
+          <div className="event-title-wrapper">
             <input
               type="text"
-              placeholder="..."
-              name="eventDate"
-              value={eventData.eventDate}
+              placeholder="Event Title"
+              name="eventName"
+              value={eventData.eventName}
               onChange={handleInputChange}
             />
-          </div>
-          <div className="input-group">
-            <label>WHERE:</label>
-            <input
-              type="text"
-              placeholder="..."
-              name="location"
-              value={eventData.location}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="input-group">
-            <label>BRING:</label>
-            <input
-              type="text"
-              placeholder="..."
-              name="bring"
-              value={eventData.bring || []}
-              onChange={handleInputChange}
-            />
+            <select
+              className="theme-selector"
+              value={theme}
+              onChange={handleThemeChange}
+            >
+              <option value="default">Default Theme</option>
+              <option value="halloween">Halloween</option>
+              <option value="spiderman">Spiderman</option>
+              <option value="pink">Pink</option>
+              <option value="blue">Blue</option>
+            </select>
           </div>
         </div>
-      </div>
-      <div className="buttons">
-        <button type="button" className="button save-button" onClick={handleSave}>SAVE</button>
-        
-        <button
-          type="button"
-          className="button publish-button"
-          onClick={handlePublish}
-        >
-          {loading ? "Publishing..." : "PUBLISH"}
-        </button>
-      </div>
-
-      {/* Display error message if there is any */}
-      {errorMessage && (
-        <div className="error-message" style={{ color: "red", marginTop: "10px" }}>
-          {errorMessage}
+  
+        <div className="container"> {/* This will hold the description and details side by side */}
+          <div className="description-container">
+            <textarea
+              placeholder="Event Description"
+              name="description"
+              value={eventData.description}
+              onChange={handleInputChange}
+            ></textarea>
+          </div>
+  
+          <div className="details-container">
+            <div className="input-group">
+              <label>WHEN:</label>
+              <input
+                type="text"
+                placeholder="Event Date"
+                name="eventDate"
+                value={eventData.eventDate}
+                onChange={handleInputChange}
+              />
+            </div>
+  
+            <div className="input-group">
+              <label>WHERE:</label>
+              <input
+                type="text"
+                placeholder="Event Location"
+                name="location"
+                value={eventData.location}
+                onChange={handleInputChange}
+              />
+            </div>
+  
+            <div className="input-group">
+              <label>BRING:</label>
+              <input
+                type="text"
+                placeholder="What to Bring"
+                name="bring"
+                value={eventData.bring}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
         </div>
-      )}
+  
+        <div className="buttons">
+          <button type="button" className="button save-button" onClick={handleSave}>
+            SAVE
+          </button>
+  
+          <button
+            type="button"
+            className="button publish-button"
+            onClick={handlePublish}
+          >
+            {loading ? "Publishing..." : "PUBLISH"}
+          </button>
+        </div>
+  
+        {errorMessage && (
+          <div className="error-message" style={{ color: "red", marginTop: "10px" }}>
+            {errorMessage}
+          </div>
+        )}
+      </form>
     </div>
   );
+  
 }
 
 export default CreateEvent;
